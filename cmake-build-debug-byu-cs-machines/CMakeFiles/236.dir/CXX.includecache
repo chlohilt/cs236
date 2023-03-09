@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/users/guest/c/chloehi/ClionRemote/236/proj2/Scheme.h
+vector
+-
+iostream
+-
+string
+-
+
+/users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.cpp
+Tuple.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.h
+sstream
+-
+
+/users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.h
+iostream
+-
+string
+-
+vector
+-
+Scheme.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Scheme.h
+

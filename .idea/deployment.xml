@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="BYU CS Machines (0cb6c5d8-8f1f-4d04-98bd-aae213b3100e)" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="BYU CS Machines (0cb6c5d8-8f1f-4d04-98bd-aae213b3100e)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="236" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-byu-cs-machines" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-byu-cs-machines" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

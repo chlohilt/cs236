@@ -1,0 +1,3 @@
+/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/rebuild_cache.dir
+/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/edit_cache.dir
+/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir

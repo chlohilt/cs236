@@ -1,0 +1,3 @@
+/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug/CMakeFiles/edit_cache.dir
+/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug/CMakeFiles/236.dir
