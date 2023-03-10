@@ -4,6 +4,7 @@
 
 #include "Database.h"
 #include <string>
+#include <map>
 
 Database::Database() { }
 
@@ -67,35 +68,52 @@ Relation Database::getMatchingRelationHelper(Predicate p) {
 }
 
 void Database::evaluateQueries(vector<Predicate> queries) {
+    vector<Relation> afterSelection;
     for (auto query: queries) {
         query.toString();
+
         //Get Relation from Database with same name as predicate name in query
         Relation r = getMatchingRelationHelper(query);
-        // use select ops to select tuples from Relation that match the query
-        bool hasConstants = false;
-        int firstIndex, secondIndex;
-        int index = 0;
-        for (auto parameter: query.parameters) {
-            // is a constant
-            if (parameter.stringName.find("'") != npos) {
-                hasConstants = true;
-                firstIndex = index;
-            }
-            else {
-                firstIndex = index;
-            }
 
-            if (index != 0 && !hasConstants) {
-                secondIndex = index;
+        // use select ops to select tuples from Relation that match the query
+        map<string, vector<int>> variablePositions;
+        int index = 0;
+        //bool matchesRelation;
+
+        // SELECTION
+        for (auto parameter: query.parameters) {
+
+            // is a constant
+            if (parameter.stringName.find("'") != -1) {
+                afterSelection.push_back(r.selectConstant(index, parameter.stringName));
+            }
+            // is a variable
+            else {
+                // if the variable is already in the map
+                if (variablePositions.count(parameter.stringName)) {
+                    (variablePositions[parameter.stringName]).push_back(index);
+                }
+                else {
+                    vector<int> positions;
+                    positions.push_back(index);
+                    variablePositions.insert({parameter.stringName, positions});
+                }
             }
             index++;
         }
 
-        if (hasConstants) {
-            r.selectConstant(firstIndex, query.parameters.at(firstIndex));
-        }
-        else {
-            r.selectEqual(firstIndex, secondIndex);
+        // checks which one match variable positions
+        if (!variablePositions.empty()) {
+            for (auto m: variablePositions) {
+                for (auto j: m.second) {
+                    for (auto i: m.second) {
+                        r.selectEqual(j, i);
+                    }
+                }
+            }
         }
     }
+
+    // PROJECTION
+
 }

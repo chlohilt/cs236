@@ -6,6 +6,7 @@
 #define INC_236_DATABASE_H
 #include "DatalogProgram.h"
 #include "Relation.h"
+using namespace std;
 
 class Database {
 private:

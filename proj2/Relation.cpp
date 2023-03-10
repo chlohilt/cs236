@@ -45,5 +45,27 @@ Relation Relation::selectEqual(int position1, int position2) {
 }
 
 Relation Relation::project(vector<int> posOfColsForResult) {
+    Relation results(name, scheme);
+    int index = 0;
+    vector<string> values;
+    for (auto t: tuples) {
+        for (auto tValues: t.values) {
+            values.push_back(tValues);
+        }
 
+        for (auto p: posOfColsForResult) {
+            if (index == p) {
+                results.addTuple(t);
+            }
+        }
+    }
+    Scheme newScheme = Scheme(values);
+    results.setScheme(newScheme);
+
+    //TODO: check for duplicates
+
+}
+
+void Relation::setScheme(Scheme s) {
+    this->scheme = s;
 }
