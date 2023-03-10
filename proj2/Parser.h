@@ -50,6 +50,6 @@ public:
 
     void parameterList(vector<Parameter> &currParamList);
 
-    void datalogProgram();
+    DatalogProgram datalogProgram();
 
 };

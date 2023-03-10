@@ -19,4 +19,6 @@ public:
 
     friend class Parser;
 
+    friend class Database;
+
 };

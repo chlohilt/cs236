@@ -82,10 +82,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Database.cpp">
+			<Option target="236"/>
+		</Unit>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Database.h">
+			<Option target="236"/>
+		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.cpp">
 			<Option target="236"/>
 		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.h">
+			<Option target="236"/>
+		</Unit>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/NonMember.h">
 			<Option target="236"/>
 		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.cpp">
@@ -143,6 +152,9 @@
 			<Option target="236"/>
 		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/main.cpp">
+			<Option target="236"/>
+		</Unit>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/nonMemberFunction.cpp">
 			<Option target="236"/>
 		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/CMakeLists.txt">

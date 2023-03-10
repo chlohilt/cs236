@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Tuple.h"
 #include <set>
+#include <ostream>
 
 class Relation {
 
@@ -24,7 +25,15 @@ public:
 
     string toString() const;
 
-    Relation select(int index, const string& value) const;
+    Relation selectConstant(int index, const string& value) const;
+
+    Relation project(vector<int> posOfColsForResult);
+
+    Relation selectEqual(int position1, int position2);
+
+    Relation rename();
+
+    friend class Database;
 };
 
 

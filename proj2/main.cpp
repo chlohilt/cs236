@@ -4,7 +4,9 @@
 #include "Scheme.h"
 #include "Tuple.h"
 #include "Relation.h"
+#include "Database.h"
 
+/*
 int main() {
 
     vector<string> names = { "ID", "Name", "Major" };
@@ -35,32 +37,36 @@ int main() {
     cout << result.toString();
 
 }
-//int main(int argc, char** argv) {
-//    // file reading
-//
-//    if (argc != 2) {
-//        return 1;
-//    }
-//    string inputString;
-//    string inputFileName = argv[1];
-//    ifstream input(inputFileName);
-//
-//    while (input.peek() != EOF) {
-//        inputString += input.get();
-//    }
-//    input.close();
-//
-//    Scanner s = Scanner(inputString);
-//    queue<Token> tokens = s.mainScanner();
-//
-//    try {
-//        Parser p = Parser(tokens);
-//        p.datalogProgram();
-//
-//    } catch (Token t) {
-//        cout << "Failure!" << endl;
-//        cout << "  " << t.toString() << endl;
-//    }
-//
-//    return 0;
-//}
+ */
+
+int main(int argc, char** argv) {
+    // file reading
+
+    if (argc != 2) {
+        return 1;
+    }
+    string inputString;
+    string inputFileName = argv[1];
+    ifstream input(inputFileName);
+
+    while (input.peek() != EOF) {
+        inputString += input.get();
+    }
+    input.close();
+
+    Scanner s = Scanner(inputString);
+    queue<Token> tokens = s.mainScanner();
+
+    try {
+        Parser p = Parser(tokens);
+        DatalogProgram d = p.datalogProgram();
+        Database database = Database();
+        database.fullEvaluation(d);
+
+    } catch (Token t) {
+        cout << "Failure!" << endl;
+        cout << "  " << t.toString() << endl;
+    }
+
+    return 0;
+}

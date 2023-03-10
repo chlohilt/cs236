@@ -10,10 +10,13 @@ private:
     vector<string> names;
 
 public:
+    Scheme();
 
     Scheme(vector<string> names);
-    // TODO: add more delegation functions as needed
+
+    void setNames(vector<string> moreNames);
 
     friend class Tuple;
+    friend class Database;
 
 };

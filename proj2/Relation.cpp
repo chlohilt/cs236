@@ -22,7 +22,8 @@ string Relation::toString() const {
     return out.str();
 }
 
-Relation Relation::select(int index, const string& value) const {
+// select that finds the tuples with a constant value in a certain column
+Relation Relation::selectConstant(int index, const string& value) const {
     Relation result(name, scheme);
     for (auto &tuple: tuples) {
         if (tuple.at(index) == value) {
@@ -30,4 +31,19 @@ Relation Relation::select(int index, const string& value) const {
         }
     }
     return result;
+}
+
+// this select finds all the tuples that have the same value in two different columns
+Relation Relation::selectEqual(int position1, int position2) {
+    Relation result(name, scheme);
+    for (auto &tuple: tuples) {
+        if (tuple.at(position1) == tuple.at(position2)) {
+            result.addTuple(tuple);
+        }
+    }
+    return result;
+}
+
+Relation Relation::project(vector<int> posOfColsForResult) {
+
 }

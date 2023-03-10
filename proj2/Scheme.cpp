@@ -8,3 +8,9 @@ Scheme::Scheme(vector<string> names) : vector<string>(names) {
     this->names = names;
 }
 
+Scheme::Scheme() { };
+
+void Scheme::setNames(vector<string> moreNames) {
+    this->names = moreNames;
+}
+

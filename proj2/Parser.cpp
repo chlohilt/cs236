@@ -234,7 +234,7 @@ void Parser::parameterList(vector<Parameter> &currParamList) { // pass the curre
     }
 }
 
-void Parser::datalogProgram() {
+DatalogProgram Parser::datalogProgram() {
     DatalogProgram d = DatalogProgram();
     try {
         match(COMMENT);

@@ -23,4 +23,6 @@ public:
 
     friend class DatalogProgram;
 
+    friend class Database;
+
 };

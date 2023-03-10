@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "236"
   "236.pdb"
+  "CMakeFiles/236.dir/proj2/Database.cpp.o"
   "CMakeFiles/236.dir/proj2/DatalogProgram.cpp.o"
   "CMakeFiles/236.dir/proj2/Parameter.cpp.o"
   "CMakeFiles/236.dir/proj2/Parser.cpp.o"
@@ -12,6 +13,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/236.dir/proj2/Token.cpp.o"
   "CMakeFiles/236.dir/proj2/Tuple.cpp.o"
   "CMakeFiles/236.dir/proj2/main.cpp.o"
+  "CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

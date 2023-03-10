@@ -123,6 +123,33 @@ depend:
 	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/build
 .PHONY : 236/fast
 
+proj2/Database.o: proj2/Database.cpp.o
+
+.PHONY : proj2/Database.o
+
+# target to build an object file
+proj2/Database.cpp.o:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Database.cpp.o
+.PHONY : proj2/Database.cpp.o
+
+proj2/Database.i: proj2/Database.cpp.i
+
+.PHONY : proj2/Database.i
+
+# target to preprocess a source file
+proj2/Database.cpp.i:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Database.cpp.i
+.PHONY : proj2/Database.cpp.i
+
+proj2/Database.s: proj2/Database.cpp.s
+
+.PHONY : proj2/Database.s
+
+# target to generate assembly for a file
+proj2/Database.cpp.s:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Database.cpp.s
+.PHONY : proj2/Database.cpp.s
+
 proj2/DatalogProgram.o: proj2/DatalogProgram.cpp.o
 
 .PHONY : proj2/DatalogProgram.o
@@ -420,6 +447,33 @@ proj2/main.cpp.s:
 	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/main.cpp.s
 .PHONY : proj2/main.cpp.s
 
+proj2/nonMemberFunction.o: proj2/nonMemberFunction.cpp.o
+
+.PHONY : proj2/nonMemberFunction.o
+
+# target to build an object file
+proj2/nonMemberFunction.cpp.o:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o
+.PHONY : proj2/nonMemberFunction.cpp.o
+
+proj2/nonMemberFunction.i: proj2/nonMemberFunction.cpp.i
+
+.PHONY : proj2/nonMemberFunction.i
+
+# target to preprocess a source file
+proj2/nonMemberFunction.cpp.i:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.i
+.PHONY : proj2/nonMemberFunction.cpp.i
+
+proj2/nonMemberFunction.s: proj2/nonMemberFunction.cpp.s
+
+.PHONY : proj2/nonMemberFunction.s
+
+# target to generate assembly for a file
+proj2/nonMemberFunction.cpp.s:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.s
+.PHONY : proj2/nonMemberFunction.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -429,6 +483,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... 236"
+	@echo "... proj2/Database.o"
+	@echo "... proj2/Database.i"
+	@echo "... proj2/Database.s"
 	@echo "... proj2/DatalogProgram.o"
 	@echo "... proj2/DatalogProgram.i"
 	@echo "... proj2/DatalogProgram.s"
@@ -462,6 +519,9 @@ help:
 	@echo "... proj2/main.o"
 	@echo "... proj2/main.i"
 	@echo "... proj2/main.s"
+	@echo "... proj2/nonMemberFunction.o"
+	@echo "... proj2/nonMemberFunction.i"
+	@echo "... proj2/nonMemberFunction.s"
 .PHONY : help
 
 
