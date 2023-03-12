@@ -16,11 +16,7 @@ public:
 
     void fullEvaluation(DatalogProgram d);
 
-    void evaluateSchemes(vector<Predicate> schemes);
-
     void addToCollection(Relation r);
-
-    void evaluateFacts(vector<Predicate> facts);
 
     Relation getMatchingRelationHelper(Predicate fact);
 

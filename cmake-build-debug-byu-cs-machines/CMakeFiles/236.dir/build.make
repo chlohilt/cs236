@@ -213,18 +213,18 @@ CMakeFiles/236.dir/proj2/Database.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/236.dir/proj2/Database.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/c/chloehi/ClionRemote/236/proj2/Database.cpp -o CMakeFiles/236.dir/proj2/Database.cpp.s
 
-CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o: CMakeFiles/236.dir/flags.make
-CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o: ../proj2/nonMemberFunction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o -c /users/guest/c/chloehi/ClionRemote/236/proj2/nonMemberFunction.cpp
+CMakeFiles/236.dir/proj2/Interpreter.cpp.o: CMakeFiles/236.dir/flags.make
+CMakeFiles/236.dir/proj2/Interpreter.cpp.o: ../proj2/Interpreter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/236.dir/proj2/Interpreter.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/236.dir/proj2/Interpreter.cpp.o -c /users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.cpp
 
-CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/guest/c/chloehi/ClionRemote/236/proj2/nonMemberFunction.cpp > CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.i
+CMakeFiles/236.dir/proj2/Interpreter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/236.dir/proj2/Interpreter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.cpp > CMakeFiles/236.dir/proj2/Interpreter.cpp.i
 
-CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/c/chloehi/ClionRemote/236/proj2/nonMemberFunction.cpp -o CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.s
+CMakeFiles/236.dir/proj2/Interpreter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/236.dir/proj2/Interpreter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.cpp -o CMakeFiles/236.dir/proj2/Interpreter.cpp.s
 
 # Object files for target 236
 236_OBJECTS = \
@@ -240,7 +240,7 @@ CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.s: cmake_force
 "CMakeFiles/236.dir/proj2/Tuple.cpp.o" \
 "CMakeFiles/236.dir/proj2/Relation.cpp.o" \
 "CMakeFiles/236.dir/proj2/Database.cpp.o" \
-"CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o"
+"CMakeFiles/236.dir/proj2/Interpreter.cpp.o"
 
 # External object files for target 236
 236_EXTERNAL_OBJECTS =
@@ -257,7 +257,7 @@ CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.s: cmake_force
 236: CMakeFiles/236.dir/proj2/Tuple.cpp.o
 236: CMakeFiles/236.dir/proj2/Relation.cpp.o
 236: CMakeFiles/236.dir/proj2/Database.cpp.o
-236: CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o
+236: CMakeFiles/236.dir/proj2/Interpreter.cpp.o
 236: CMakeFiles/236.dir/build.make
 236: CMakeFiles/236.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable 236"

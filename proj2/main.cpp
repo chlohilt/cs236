@@ -5,6 +5,7 @@
 #include "Tuple.h"
 #include "Relation.h"
 #include "Database.h"
+#include "Interpreter.h"
 
 /*
 int main() {
@@ -45,23 +46,53 @@ int main(int argc, char** argv) {
     if (argc != 2) {
         return 1;
     }
-    string inputString;
-    string inputFileName = argv[1];
+    string inputString = "\n"
+                         "\n"
+                         "# single params, only constants\n"
+                         "\n"
+                         "\n"
+                         "Schemes:\n"
+                         "\n"
+                         "A(X)\n"
+                         "B(Y)\n"
+                         "C(Z)\n"
+                         "\n"
+                         "Facts:\n"
+                         "\n"
+                         "A('1').\n"
+                         "A('2').\n"
+                         "\n"
+                         "B('2').\n"
+                         "B('3').\n"
+                         "\n"
+                         "C('').\n"
+                         "C('4').\n"
+                         "\n"
+                         "Rules:\n"
+                         "\n"
+                         "Queries:\n"
+                         "\n"
+                         "A('2')?\n"
+                         "B('4')?\n"
+                         "C('')?\n"
+                         "\n"
+                         "";
+    //string inputFileName = argv[1];
+    /*string inputFileName = "input.txt";
     ifstream input(inputFileName);
 
     while (input.peek() != EOF) {
         inputString += input.get();
     }
-    input.close();
+    input.close();*/
 
     Scanner s = Scanner(inputString);
     queue<Token> tokens = s.mainScanner();
 
     try {
         Parser p = Parser(tokens);
-        DatalogProgram d = p.datalogProgram();
-        Database database = Database();
-        database.fullEvaluation(d);
+        auto datalogProgram = p.datalogProgram();
+        auto interpreter = Interpreter(datalogProgram);
 
     } catch (Token t) {
         cout << "Failure!" << endl;

@@ -9,6 +9,8 @@
 /users/guest/c/chloehi/ClionRemote/236/proj2/Database.cpp
 Database.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
+string
+-
 
 /users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
 DatalogProgram.h
@@ -27,6 +29,20 @@ Predicate.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Predicate.h
 Rule.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Rule.h
+
+/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.cpp
+Interpreter.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.h
+map
+-
+
+/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.h
+DatalogProgram.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.h
+Database.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
+Relation.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Relation.h
 
 /users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.h
 Token.h
@@ -54,14 +70,6 @@ Token.h
 Parameter.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.h
 vector
--
-
-/users/guest/c/chloehi/ClionRemote/236/proj2/Relation.cpp
-Relation.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Relation.h
-sstream
--
-bits/stdc++.h
 -
 
 /users/guest/c/chloehi/ClionRemote/236/proj2/Relation.h
@@ -139,8 +147,8 @@ Tuple.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.h
 Relation.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Relation.h
-
-/users/guest/c/chloehi/ClionRemote/236/proj2/nonMemberFunction.cpp
-Relation.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Relation.h
+Database.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
+Interpreter.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.h
 

@@ -177,6 +177,33 @@ proj2/DatalogProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/DatalogProgram.cpp.s
 .PHONY : proj2/DatalogProgram.cpp.s
 
+proj2/Interpreter.o: proj2/Interpreter.cpp.o
+
+.PHONY : proj2/Interpreter.o
+
+# target to build an object file
+proj2/Interpreter.cpp.o:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Interpreter.cpp.o
+.PHONY : proj2/Interpreter.cpp.o
+
+proj2/Interpreter.i: proj2/Interpreter.cpp.i
+
+.PHONY : proj2/Interpreter.i
+
+# target to preprocess a source file
+proj2/Interpreter.cpp.i:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Interpreter.cpp.i
+.PHONY : proj2/Interpreter.cpp.i
+
+proj2/Interpreter.s: proj2/Interpreter.cpp.s
+
+.PHONY : proj2/Interpreter.s
+
+# target to generate assembly for a file
+proj2/Interpreter.cpp.s:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Interpreter.cpp.s
+.PHONY : proj2/Interpreter.cpp.s
+
 proj2/Parameter.o: proj2/Parameter.cpp.o
 
 .PHONY : proj2/Parameter.o
@@ -447,33 +474,6 @@ proj2/main.cpp.s:
 	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/main.cpp.s
 .PHONY : proj2/main.cpp.s
 
-proj2/nonMemberFunction.o: proj2/nonMemberFunction.cpp.o
-
-.PHONY : proj2/nonMemberFunction.o
-
-# target to build an object file
-proj2/nonMemberFunction.cpp.o:
-	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.o
-.PHONY : proj2/nonMemberFunction.cpp.o
-
-proj2/nonMemberFunction.i: proj2/nonMemberFunction.cpp.i
-
-.PHONY : proj2/nonMemberFunction.i
-
-# target to preprocess a source file
-proj2/nonMemberFunction.cpp.i:
-	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.i
-.PHONY : proj2/nonMemberFunction.cpp.i
-
-proj2/nonMemberFunction.s: proj2/nonMemberFunction.cpp.s
-
-.PHONY : proj2/nonMemberFunction.s
-
-# target to generate assembly for a file
-proj2/nonMemberFunction.cpp.s:
-	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/nonMemberFunction.cpp.s
-.PHONY : proj2/nonMemberFunction.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -489,6 +489,9 @@ help:
 	@echo "... proj2/DatalogProgram.o"
 	@echo "... proj2/DatalogProgram.i"
 	@echo "... proj2/DatalogProgram.s"
+	@echo "... proj2/Interpreter.o"
+	@echo "... proj2/Interpreter.i"
+	@echo "... proj2/Interpreter.s"
 	@echo "... proj2/Parameter.o"
 	@echo "... proj2/Parameter.i"
 	@echo "... proj2/Parameter.s"
@@ -519,9 +522,6 @@ help:
 	@echo "... proj2/main.o"
 	@echo "... proj2/main.i"
 	@echo "... proj2/main.s"
-	@echo "... proj2/nonMemberFunction.o"
-	@echo "... proj2/nonMemberFunction.i"
-	@echo "... proj2/nonMemberFunction.s"
 .PHONY : help
 
 

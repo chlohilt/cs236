@@ -5,6 +5,7 @@ class Parameter {
 private:
     string stringName;
     string idName;
+    bool isConstant;
 
 public:
     Parameter();
@@ -20,5 +21,7 @@ public:
     friend class Parser;
 
     friend class Database;
+
+    friend class Interpreter;
 
 };

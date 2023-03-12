@@ -272,7 +272,8 @@ DatalogProgram Parser::datalogProgram() {
         queryList(queries);
         match(EOF1);
         d.setQueries(queries);
-        cout << d.toString();
+        //cout << d.toString();
+        return d;
     } catch(Token t) {
         throw tokens.front();
     }

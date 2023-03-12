@@ -27,7 +27,7 @@ public:
 
     void setDomain(set<string> domain);
 
-    friend class Database;
+    friend class Interpreter;
 
 private:
     set<string> domain;

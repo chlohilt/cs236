@@ -14,8 +14,10 @@ string Parameter::toString() {
 
 void Parameter::setString(string stringName){
     this->stringName = stringName;
+    this->isConstant = true;
 }
 
 void Parameter::setId(string idName) {
     this->idName = idName;
+    this->isConstant = false;
 }

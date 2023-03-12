@@ -13,6 +13,7 @@ Relation::Relation(const string& name, const Scheme& scheme): name(name), scheme
 
 void Relation::addTuple(const Tuple& tuple) {
     tuples.insert(tuple);
+    this->tuples = tuples;
 }
 
 string Relation::toString() const {
@@ -48,24 +49,26 @@ Relation Relation::project(vector<int> posOfColsForResult) {
     Relation results(name, scheme);
     int index = 0;
     vector<string> values;
-    for (auto t: tuples) {
-        for (auto tValues: t.values) {
+    for (auto tuple: tuples) {
+        // this part uses the tuples values to set the schemes values
+        // Idk if this part is right
+        for (auto tValues: tuple.values) {
             values.push_back(tValues);
         }
 
         for (auto p: posOfColsForResult) {
             if (index == p) {
-                results.addTuple(t);
+                results.addTuple(tuple);
             }
         }
     }
-    Scheme newScheme = Scheme(values);
-    results.setScheme(newScheme);
+/*    Scheme newScheme = Scheme(values);
+    results.setScheme(newScheme);*/
 
     //TODO: check for duplicates
 
 }
 
-void Relation::setScheme(Scheme s) {
-    this->scheme = s;
+Relation Relation::rename(Scheme newScheme) {
+    this->scheme = newScheme;
 }

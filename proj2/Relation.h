@@ -29,13 +29,13 @@ public:
 
     Relation project(vector<int> posOfColsForResult);
 
-    void setScheme(Scheme);
-
     Relation selectEqual(int position1, int position2);
 
-    Relation rename();
+    Relation rename(Scheme newScheme);
 
     friend class Database;
+
+    friend class Interpreter;
 };
 
 

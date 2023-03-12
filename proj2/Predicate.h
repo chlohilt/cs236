@@ -25,4 +25,6 @@ public:
 
     friend class Database;
 
+    friend class Interpreter;
+
 };
