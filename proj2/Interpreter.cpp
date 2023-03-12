@@ -76,19 +76,22 @@ void Interpreter::evaluateQueries() {
             // if query has a variable, print out those values
             int index = 0;
 
-            for (auto s: r.scheme.names) {
-                for (auto t: r.tuples) {
-                    int secondIndex = 0;
-                    for (auto v: t.values) {
-                        if (index == secondIndex) {
+
+            for (auto t: r.tuples) {
+                int tupleIndex = 0;
+                for (auto v: t.values) {
+                    index = 0;
+                    for (auto s: r.scheme.names) {
+                        if (index == r.scheme.names.size() - 1 && index == tupleIndex) {
                             cout << "  " << s << "=" << v << endl;
-                            break;
                         }
-                        secondIndex++;
+                        else if (index == tupleIndex) {
+                            cout << "  " << s << "=" << v << ", ";
+                        }
+                        index++;
                     }
-                    break;
+                    tupleIndex++;
                 }
-                index++;
             }
 
             // if names in schemes is a variable, how do i figure that out
