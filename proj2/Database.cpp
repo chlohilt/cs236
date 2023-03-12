@@ -15,7 +15,7 @@ void Database::addToCollection(Relation r) {
 
 // this function retrieves the relation in the database with the same name as the Predicate
 Relation Database::getMatchingRelationHelper(Predicate p) {
-    for (auto relation: collection) {
+    for (Relation &relation: collection) {
         if (p.id == relation.name) {
             return relation;
         }

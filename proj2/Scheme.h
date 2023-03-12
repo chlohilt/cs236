@@ -17,6 +17,9 @@ public:
     void setNames(vector<string> moreNames);
 
     friend class Tuple;
+
     friend class Database;
+
+    friend class Interpreter;
 
 };

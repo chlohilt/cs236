@@ -16,12 +16,13 @@ Interpreter::Interpreter(DatalogProgram datalogProgram) {
 }
 
 void Interpreter::makeSchemeRelations() {
-    vector<string> schemeNames;
     // go through Predicates and create Relation from those
-    for (auto s: datalogProgram.Schemes) {
+    for (auto &s: datalogProgram.Schemes) {
         Scheme newScheme;
         // have to loop through each Predicate's parameters to set up scheme
-        for (auto p: s.parameters) {
+        vector<string> schemeNames;
+        for (auto &p: s.parameters) {
+
             if (p.stringName.length() != 0) {
                 schemeNames.push_back(p.stringName);
             }
@@ -38,11 +39,11 @@ void Interpreter::makeSchemeRelations() {
 
 void Interpreter::makeFactRelations() {
     // loop through facts in Datalog and check which fact matches a relation in the database
-    for (auto f: datalogProgram.Facts) {
+    for (auto &f: datalogProgram.Facts) {
         vector<string> factValues;
         Relation relationToAddTuple = database.getMatchingRelationHelper(f);
         // have to loop through each Predicate's parameters to set up fact
-        for (auto p: f.parameters) {
+        for (auto &p: f.parameters) {
             if (p.stringName.length() != 0) {
                 factValues.push_back(p.stringName);
             }
@@ -55,25 +56,47 @@ void Interpreter::makeFactRelations() {
         // TODO: Might need to go through database and delete the original and replace
         //it with the one with tuples
         relationToAddTuple.addTuple(toAddTuple);
+        for (Relation &relation: database.collection) {
+            if (relation.name == relationToAddTuple.name) {
+                relation = relationToAddTuple;
+            }
+        }
     }
 }
 
 void Interpreter::evaluateQueries() {
-    for (auto query: datalogProgram.Queries) {
+    for (auto &query: datalogProgram.Queries) {
         cout << query.toString() << "? ";
         Relation r = evaluateQuery(query);
         if (r.tuples.size() == 0) {
             cout << "No" << endl;
         }
         else {
-            cout << "Yes" << endl;
+            cout << "Yes(" << r.tuples.size() << ")" << endl;
+            // if query has a variable, print out those values
+            int index = 0;
+
+            for (auto s: r.scheme.names) {
+                for (auto t: r.tuples) {
+                    int secondIndex = 0;
+                    for (auto v: t.values) {
+                        if (index == secondIndex) {
+                            cout << "  " << s << "=" << v << endl;
+                            break;
+                        }
+                        secondIndex++;
+                    }
+                    break;
+                }
+                index++;
+            }
+
+            // if names in schemes is a variable, how do i figure that out
         }
     }
 }
 
 Relation Interpreter::evaluateQuery(Predicate query) {
-    vector<Relation> afterSelection;
-
     //Get Relation from Database with same name as predicate name in query
     Relation r = database.getMatchingRelationHelper(query);
 
@@ -87,7 +110,7 @@ Relation Interpreter::evaluateQuery(Predicate query) {
 
         // is a constant
         if (parameter.isConstant) {
-            afterSelection.push_back(r.selectConstant(index, parameter.stringName));
+            r = r.selectConstant(index, parameter.stringName);
         }
         // is a variable
         else {
@@ -110,7 +133,7 @@ Relation Interpreter::evaluateQuery(Predicate query) {
             else {
                 vector<int> positions;
                 positions.push_back(index);
-                variablePositions.insert({parameter.stringName, positions});
+                variablePositions.insert({parameter.idName, positions});
             }
         }
         index++;

@@ -22,6 +22,8 @@ public:
 
     void evaluateQueries(vector<Predicate> queries);
 
+    friend class Interpreter;
+
 };
 
 

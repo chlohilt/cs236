@@ -16,4 +16,6 @@ public:
 
     friend class Relation;
 
+    friend class Interpreter;
+
 };

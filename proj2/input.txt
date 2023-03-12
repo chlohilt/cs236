@@ -1,6 +1,6 @@
 
 
-# no facts, everything is false
+# duplicate facts, repeated queries
 
 
 Schemes:
@@ -11,12 +11,42 @@ C(Z)
 
 Facts:
 
+A('1').
+A('2').
+A('1').
+A('2').
+
+B('2').
+B('3').
+
+C('').
+C('4').
+
+B('2').
+B('3').
+
+C('').
+C('4').
+
 Rules:
 
 Queries:
 
+A('1')?
 A('2')?
+A('3')?
+
+B('2')?
+B('3')?
 B('4')?
-C('8')?
+B('4')?
+B('5')?
+
+A('2')?
+
+C('')?
+C('')?
+C('4')?
+C('2')?
 
 
