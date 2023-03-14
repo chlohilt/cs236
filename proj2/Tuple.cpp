@@ -21,6 +21,19 @@ string Tuple::toString(const Scheme& scheme) const {
             schemeNonConstants.push_back(scheme.names.at(nameValue));
         }
     }
+    int sizePrint = 0;
+    vector<string> visitedAlreadyPartTwo;
+    // checking how big the list is I need to print
+    for (int nameValue = 0; nameValue < scheme.names.size(); nameValue++) {
+        if ((scheme.names.at(nameValue)).find("'") == -1) {
+            vector<string>::iterator it = find(visitedAlreadyPartTwo.begin(), visitedAlreadyPartTwo.end(), scheme.names.at(nameValue));
+            if (it == visitedAlreadyPartTwo.end()) {
+                sizePrint++;
+            }
+        }
+        visitedAlreadyPartTwo.push_back(scheme.names.at(nameValue));
+    }
+
     for (int nameValue = 0; nameValue < scheme.names.size(); nameValue++) {
         if ((scheme.names.at(nameValue)).find("'") == -1) {
             if (numberOfGoodIterations == 0) {
@@ -30,7 +43,10 @@ string Tuple::toString(const Scheme& scheme) const {
             if (it == visitedAlready.end()) {
                 out << scheme.names.at(nameValue) << "=" << tuple.values.at(nameValue);
                 // TODO: need to check for when to print end comma
-                out << ", ";
+                if (numberOfGoodIterations < sizePrint - 1) {
+                    out << ", ";
+                }
+
             }
             numberOfGoodIterations++;
             visitedAlready.push_back(scheme.names.at(nameValue));
