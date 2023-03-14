@@ -22,7 +22,6 @@ void Interpreter::makeSchemeRelations() {
         // have to loop through each Predicate's parameters to set up scheme
         vector<string> schemeNames;
         for (auto &p: s.parameters) {
-
             if (p.stringName.length() != 0) {
                 schemeNames.push_back(p.stringName);
             }
@@ -53,8 +52,6 @@ void Interpreter::makeFactRelations() {
         }
 
         Tuple toAddTuple = Tuple(factValues);
-        // TODO: Might need to go through database and delete the original and replace
-        //it with the one with tuples
         relationToAddTuple.addTuple(toAddTuple);
         for (Relation &relation: database.collection) {
             if (relation.name == relationToAddTuple.name) {
@@ -68,87 +65,70 @@ void Interpreter::evaluateQueries() {
     for (auto &query: datalogProgram.Queries) {
         cout << query.toString() << "? ";
         Relation r = evaluateQuery(query);
-        if (r.tuples.size() == 0) {
-            cout << "No" << endl;
-        }
-        else {
-            cout << "Yes(" << r.tuples.size() << ")" << endl;
-            // if query has a variable, print out those values
-            int index = 0;
-
-
-            for (auto t: r.tuples) {
-                int tupleIndex = 0;
-                for (auto v: t.values) {
-                    index = 0;
-                    for (auto s: r.scheme.names) {
-                        if (index == r.scheme.names.size() - 1 && index == tupleIndex) {
-                            cout << "  " << s << "=" << v << endl;
-                        }
-                        else if (index == tupleIndex) {
-                            cout << "  " << s << "=" << v << ", ";
-                        }
-                        index++;
-                    }
-                    tupleIndex++;
-                }
-            }
-
-            // if names in schemes is a variable, how do i figure that out
-        }
     }
 }
+
 
 Relation Interpreter::evaluateQuery(Predicate query) {
     //Get Relation from Database with same name as predicate name in query
     Relation r = database.getMatchingRelationHelper(query);
 
-    // use select ops to select tuples from Relation that match the query
-    map<string, vector<int>> variablePositions;
-    int index = 0;
-    //bool matchesRelation;
+    map<string, unsigned int> variablePositions;
+    bool seenBefore = false;
+    // make vector for indexes where variables were first seen
+    vector<int> newColNames;
+    // vector to rename columns to same as query variables
+    vector<string> newSchemeNames;
 
-    // SELECTION
-    for (auto parameter: query.parameters) {
-
-        // is a constant
-        if (parameter.isConstant) {
-            r = r.selectConstant(index, parameter.stringName);
+    for (unsigned int i = 0; i < query.parameters.size(); i++) {
+        // for constants
+        if (query.parameters[i].isConstant) {
+            r = r.selectConstant(i, query.parameters[i].stringName);
+            newSchemeNames.push_back(query.parameters[i].stringName);
         }
-        // is a variable
+        // for variables
         else {
-            // if the variable is already in the map
-            if (variablePositions.count(parameter.stringName)) {
-                // add the parameter index to the map then loop through map
-                // select when it's equal
-                (variablePositions[parameter.stringName]).push_back(index);
-                for (auto mapItem: variablePositions) {
-                    for (auto j: mapItem.second) {
-                        for (auto i: mapItem.second) {
-                            r.selectEqual(j, i);
-                            r.project(mapItem.second);
-                            r.project(mapItem.second);
-                            //afterSelectEqual.rename();
-                        }
-                    }
+            // check if we've seen it before
+            for (auto mapItem: variablePositions) {
+                if (query.parameters[i].idName == mapItem.first){
+                    seenBefore = true;
+                    r = r.selectEqual(i, mapItem.second);
+                    newSchemeNames.push_back(query.parameters[i].idName);
                 }
             }
-            else {
-                vector<int> positions;
-                positions.push_back(index);
-                variablePositions.insert({parameter.idName, positions});
+
+            if (!seenBefore) {
+                variablePositions.insert({(query.parameters[i].idName), i});
+                newColNames.push_back(i);
+                newSchemeNames.push_back(query.parameters[i].idName);
             }
         }
-        index++;
+
+        r = r.project(newColNames);
+        Scheme newScheme = Scheme(newSchemeNames);
+        r = r.rename(newScheme);
+
     }
 
-/*    for (auto v: variablePositions) {
-        r.project(v);
-        r.rename(v);
-    }*/
+    // printing
+    if (r.tuples.size() == 0) {
+        cout << "No" << endl;
+    } else {
+        cout << "Yes(" << r.tuples.size() << ")" << endl;
+        cout << r.toString();
+    }
 
-
-    // PROJECTION
     return r;
 
+}
+
+void Interpreter::printHelper(Relation r) {
+    if (r.tuples.size() == 0) {
+        cout << "No" << endl;
+    } else {
+        cout << "Yes(" << r.tuples.size() << ")" << endl;
+        // if query has a variable, print out those values
+        // only print those with variables
+        cout << r.toString();
+    }
 }

@@ -5,8 +5,6 @@
 #include "Database.h"
 #include <string>
 
-
-
 Database::Database() { }
 
 void Database::addToCollection(Relation r) {
@@ -20,5 +18,6 @@ Relation Database::getMatchingRelationHelper(Predicate p) {
             return relation;
         }
     }
+    // return empty relation
 }
 

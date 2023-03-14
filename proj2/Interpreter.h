@@ -23,6 +23,8 @@ public:
 
     void evaluateQueries();
 
+    void printHelper(Relation r);
+
     Relation evaluateQuery(Predicate p);
 
 };
