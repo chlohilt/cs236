@@ -11,6 +11,11 @@ Relation::Relation(const string& name, const Scheme& scheme): name(name), scheme
     this->scheme = scheme;
 };
 
+Relation::Relation() {
+
+}
+
+
 void Relation::addTuple(const Tuple& tuple) {
     tuples.insert(tuple);
     this->tuples = tuples;
@@ -19,7 +24,7 @@ void Relation::addTuple(const Tuple& tuple) {
 string Relation::toString() const {
     stringstream out;
     for (auto& tuple : tuples)
-        out << tuple.toString(scheme) << endl;
+        out << tuple.toString(this->scheme) << endl;
     return out.str();
 }
 
@@ -36,13 +41,13 @@ Relation Relation::selectConstant(int index, const string& value) const {
 
 // this select finds all the tuples that have the same value in two different columns
 Relation Relation::selectEqual(int position1, int position2) {
-    Relation result(name, scheme);
-    for (auto &tuple: tuples) {
+    Relation results(name,scheme);
+    for (auto &tuple: this->tuples) {
         if (tuple.at(position1) == tuple.at(position2)) {
-            result.addTuple(tuple);
+            results.addTuple(tuple);
         }
     }
-    return result;
+    return results;
 }
 
 Relation Relation::project(vector<int> posOfColsForResult) {

@@ -19,5 +19,7 @@ Relation Database::getMatchingRelationHelper(Predicate p) {
         }
     }
     // return empty relation
+    Relation results = Relation();
+    return results;
 }
 

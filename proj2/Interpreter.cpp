@@ -88,6 +88,7 @@ Relation Interpreter::evaluateQuery(Predicate query) {
         }
         // for variables
         else {
+            seenBefore = false;
             // check if we've seen it before
             for (auto mapItem: variablePositions) {
                 if (query.parameters[i].idName == mapItem.first){

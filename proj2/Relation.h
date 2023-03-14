@@ -21,6 +21,8 @@ public:
 
     Relation(const string& name, const Scheme& scheme);
 
+    Relation();
+
     void addTuple(const Tuple& tuple);
 
     string toString() const;
