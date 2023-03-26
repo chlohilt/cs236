@@ -35,6 +35,14 @@ public:
 
     Relation rename(Scheme newScheme);
 
+    static bool joinable(const Scheme& leftScheme, const Scheme& rightScheme, const Tuple& leftTuple, const Tuple& rightTuple);
+
+    Relation join(const Relation& right);
+
+    Scheme combineSchemes(Relation r1, Relation r2);
+
+    Tuple combineTuples(Tuple t1, Tuple t2);
+
     friend class Database;
 
     friend class Interpreter;

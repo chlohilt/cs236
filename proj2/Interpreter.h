@@ -23,9 +23,13 @@ public:
 
     void evaluateQueries();
 
+    void evaluateRules();
+
+    Relation evaluateRule(Rule r);
+
     void printHelper(Relation r);
 
-    Relation evaluateQuery(Predicate p);
+    Relation evaluatePredicate(Predicate& p);
 
 };
 

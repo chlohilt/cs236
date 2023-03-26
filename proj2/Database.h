@@ -22,6 +22,8 @@ public:
 
     void evaluateQueries(vector<Predicate> queries);
 
+    int tupleCount();
+
     friend class Interpreter;
 
 };

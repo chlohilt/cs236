@@ -12,6 +12,9 @@ Interpreter::Interpreter(DatalogProgram datalogProgram) {
     this->database = d;
     makeSchemeRelations();
     makeFactRelations();
+    cout << "Rule Evaluation" << endl;
+    evaluateRules();
+    cout << "Query Evaluation" << endl;
     evaluateQueries();
 }
 
@@ -64,12 +67,57 @@ void Interpreter::makeFactRelations() {
 void Interpreter::evaluateQueries() {
     for (auto &query: datalogProgram.Queries) {
         cout << query.toString() << "? ";
-        Relation r = evaluateQuery(query);
+        Relation r = evaluatePredicate(query);
     }
 }
 
+void Interpreter::evaluateRules() {
+    int totalTuples;
+    int newTotalTuples;
+    int passesThrough = 0;
+    do {
+        // TODO: make sure least fixed point is working
+        totalTuples = this->database.tupleCount();
+        for (unsigned int i = 0; i < this->datalogProgram.Rules.size(); ++i) {
+            cout << this->datalogProgram.Rules[i].toString() << endl;
+            evaluateRule(this->datalogProgram.Rules[i]);
+        }
+        newTotalTuples = this->database.tupleCount();
+        passesThrough++;
+    } while (totalTuples != newTotalTuples);
 
-Relation Interpreter::evaluateQuery(Predicate query) {
+
+
+    cout << "Schemes populated after " << passesThrough << " passes through the Rules." << endl << endl;
+}
+
+Relation Interpreter::evaluateRule(Rule r) {
+    vector<Relation> joinRelations;
+    for (unsigned int i = 0; i < r.predicates.size(); ++i) {
+        // skip first one since it's on the left hand side of the rule
+        // then evaluate same way as queries
+        if (i != 0 && r.predicates.size() == 2) {
+            Relation result = evaluatePredicate(r.predicates[i]);
+            return result;
+        }
+        else if (i != 0 && r.predicates.size() > 2) {
+            Relation result = evaluatePredicate(r.predicates[i]);
+            joinRelations.push_back(result);
+        }
+    }
+// join the result relations
+    for (unsigned int i = 0; i < joinRelations.size(); ++i) {
+        joinRelations.at(i).join(joinRelations.at(i));
+    }
+
+
+
+
+
+
+}
+
+Relation Interpreter::evaluatePredicate(Predicate& query) {
     //Get Relation from Database with same name as predicate name in query
     Relation r = database.getMatchingRelationHelper(query);
 
@@ -110,14 +158,8 @@ Relation Interpreter::evaluateQuery(Predicate query) {
         r = r.rename(newScheme);
 
     }
-
-    // printing
-    if (r.tuples.size() == 0) {
-        cout << "No" << endl;
-    } else {
-        cout << "Yes(" << r.tuples.size() << ")" << endl;
-        cout << r.toString();
-    }
+    // TODO: only use print helper if it's not a rule
+    printHelper(r);
 
     return r;
 

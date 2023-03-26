@@ -23,3 +23,13 @@ Relation Database::getMatchingRelationHelper(Predicate p) {
     return results;
 }
 
+int Database::tupleCount() {
+    int totalTupleCount = 0;
+    for (unsigned int i = 0; i < collection.size(); ++i) {
+        for (unsigned int j = 0; j < collection[i].tuples.size(); ++j) {
+            totalTupleCount++;
+        }
+    }
+
+    return totalTupleCount;
+}

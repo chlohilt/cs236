@@ -14,3 +14,7 @@ void Scheme::setNames(vector<string> moreNames) {
     this->names = moreNames;
 }
 
+string Scheme::getTopName() {
+    return this->names.front();
+}
+

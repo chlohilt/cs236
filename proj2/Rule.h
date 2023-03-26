@@ -18,4 +18,6 @@ public:
 
     friend class Parser;
 
+    friend class Interpreter;
+
 };

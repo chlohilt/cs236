@@ -73,3 +73,71 @@ Relation Relation::rename(Scheme newScheme) {
     this->scheme = newScheme;
     return *this;
 }
+
+bool Relation::joinable(const Scheme& leftScheme, const Scheme& rightScheme,
+                        const Tuple& leftTuple, const Tuple& rightTuple) {
+    bool isJoinable = true;
+    for (unsigned int i = 0; i < leftScheme.size(); i++) {
+        const string& leftName = leftScheme.at(i);
+        const string& leftValue = leftTuple.at(i);
+        cout << "left name: " << leftName << " value: " << leftValue << endl;
+        for (unsigned int j = 0; j < rightScheme.size(); j++) {
+            const string& rightName = rightScheme.at(j);
+            const string& rightValue = rightTuple.at(j);
+            cout << "right name: " << rightName << " value: " << rightValue << endl;
+            if (rightName == leftName && rightValue != leftValue) {
+                isJoinable = false;
+            }
+        }
+    }
+
+    return isJoinable;
+}
+
+Relation Relation::join(const Relation& right) {
+    const Relation& left = *this;
+    Scheme combinedScheme = combineSchemes(left, right);
+    // TODO: find what to name this--think it's the top scheme, check if this is right lol
+    Relation result = Relation(combinedScheme.getTopName(), combinedScheme);
+
+    for (const Tuple& leftTuple : left.tuples) {
+        for (const Tuple& rightTuple : right.tuples) {
+            if (joinable(left.scheme, right.scheme, leftTuple, rightTuple)) {
+                Tuple newTuple = combineTuples(leftTuple, rightTuple);
+                result.addTuple(newTuple);
+            }
+        }
+    }
+
+    //DEBUG STATEMENT
+    for (const Tuple& leftTuple : left.tuples) {
+        cout << "left tuple: " << leftTuple.toString(left.scheme) << endl;
+        for (const Tuple& rightTuple : right.tuples) {
+            cout << "right tuple: " << rightTuple.toString(right.scheme) << endl;
+        }
+    }
+
+    return result;
+}
+
+Scheme Relation::combineSchemes(Relation left, Relation right) {
+    vector<string> newNames;
+    for (auto leftScheme: left.scheme) {
+        newNames.push_back(leftScheme);
+    }
+    for (auto rightScheme: right.scheme) {
+        newNames.push_back(rightScheme);
+    }
+    Scheme newScheme = Scheme(newNames);
+}
+
+Tuple Relation::combineTuples(Tuple left, Tuple right) {
+    vector<string> newValues;
+    for (auto leftValue: left.values) {
+        newValues.push_back(leftValue);
+    }
+    for (auto rightValue: right.values) {
+        newValues.push_back(rightValue);
+    }
+    Tuple newTuple = Tuple(newValues);
+}

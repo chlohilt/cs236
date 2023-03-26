@@ -16,6 +16,8 @@ public:
 
     void setNames(vector<string> moreNames);
 
+    string getTopName();
+
     friend class Tuple;
 
     friend class Database;
