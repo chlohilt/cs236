@@ -33,3 +33,17 @@ int Database::tupleCount() {
 
     return totalTupleCount;
 }
+
+void Database::unionWithDatabase(Relation r) {
+    Database database = *this;
+    for (unsigned int i = 0; i < database.collection.size(); ++i) {
+        if (database.collection.at(i).name == r.name) {
+            for (unsigned int i = 0; i < r.tuples.size(); ++i) {
+                set<int>::iterator it = r.tuples.begin();
+                advance(it, i);
+                //TODO: Fix set at function
+                database.collection.at(i).tuples.insert(r.tuples.at(r.tuples.begin(), i));
+            }
+        }
+    }
+}

@@ -55,7 +55,6 @@ Relation Relation::project(vector<int> posOfColsForResult) {
     vector<string> values;
     for (auto tuple: tuples) {
         // this part uses the tuples values to set the schemes values
-        // Idk if this part is right
         for (auto tValues: tuple.values) {
             values.push_back(tValues);
         }
@@ -106,14 +105,6 @@ Relation Relation::join(const Relation& right) {
                 Tuple newTuple = combineTuples(leftTuple, rightTuple);
                 result.addTuple(newTuple);
             }
-        }
-    }
-
-    //DEBUG STATEMENT
-    for (const Tuple& leftTuple : left.tuples) {
-        cout << "left tuple: " << leftTuple.toString(left.scheme) << endl;
-        for (const Tuple& rightTuple : right.tuples) {
-            cout << "right tuple: " << rightTuple.toString(right.scheme) << endl;
         }
     }
 

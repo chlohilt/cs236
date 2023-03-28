@@ -24,6 +24,8 @@ public:
 
     int tupleCount();
 
+    void unionWithDatabase(Relation r);
+
     friend class Interpreter;
 
 };

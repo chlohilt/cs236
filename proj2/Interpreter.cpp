@@ -79,7 +79,7 @@ void Interpreter::evaluateRules() {
         // TODO: make sure least fixed point is working
         totalTuples = this->database.tupleCount();
         for (unsigned int i = 0; i < this->datalogProgram.Rules.size(); ++i) {
-            cout << this->datalogProgram.Rules[i].toString() << endl;
+            cout << this->datalogProgram.Rules[i].toString() << "." << endl;
             evaluateRule(this->datalogProgram.Rules[i]);
         }
         newTotalTuples = this->database.tupleCount();
@@ -92,29 +92,50 @@ void Interpreter::evaluateRules() {
 }
 
 Relation Interpreter::evaluateRule(Rule r) {
+    Relation result;
     vector<Relation> joinRelations;
     for (unsigned int i = 0; i < r.predicates.size(); ++i) {
         // skip first one since it's on the left hand side of the rule
         // then evaluate same way as queries
         if (i != 0 && r.predicates.size() == 2) {
-            Relation result = evaluatePredicate(r.predicates[i]);
-            return result;
+            result = evaluatePredicate(r.predicates[i]);
         }
         else if (i != 0 && r.predicates.size() > 2) {
-            Relation result = evaluatePredicate(r.predicates[i]);
+            result = evaluatePredicate(r.predicates[i]);
             joinRelations.push_back(result);
         }
     }
-// join the result relations
+// join the result relations if there is more than one
     for (unsigned int i = 0; i < joinRelations.size(); ++i) {
-        joinRelations.at(i).join(joinRelations.at(i));
+        // first combine the first two result relations
+        if (i == 0) {
+            result = joinRelations.at(i).join(joinRelations.at(i + 1));
+            joinRelations.erase(joinRelations.begin() + i);
+            joinRelations.erase(joinRelations.begin() + (i + 1));
+        }
+        // then combine result from that join with every other relation
+        else {
+            result = result.join(joinRelations.at(i));
+        }
+
     }
+    // pass in head predicate to get columns needed
+    vector<int> headColumnsToProject = projectHelper(r.predicates[0]);
+    // project, rename, union
+    result = result.project(headColumnsToProject);
+    Relation matchesHead = database.getMatchingRelationHelper(r.predicates[0]);
+    result = result.rename(matchesHead.scheme);
+    database.unionWithDatabase(matchesHead);
 
+    return result;
+}
 
-
-
-
-
+vector<int> Interpreter::projectHelper(Predicate head) {
+    vector<int> headColumnsToProject;
+    for (unsigned int i = 0; i < head.parameters.size(); ++i){
+        headColumnsToProject.push_back(i);
+    }
+    return headColumnsToProject;
 }
 
 Relation Interpreter::evaluatePredicate(Predicate& query) {
