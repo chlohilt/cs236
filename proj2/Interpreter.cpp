@@ -8,8 +8,8 @@
 Interpreter::Interpreter(DatalogProgram datalogProgram) {
     this->datalogProgram = datalogProgram;
     // create empty database
-    Database d = Database();
-    this->database = d;
+/*    Database d = Database();
+    this->database = d;*/
     makeSchemeRelations();
     makeFactRelations();
     cout << "Rule Evaluation" << endl;
@@ -67,7 +67,7 @@ void Interpreter::makeFactRelations() {
 void Interpreter::evaluateQueries() {
     for (auto &query: datalogProgram.Queries) {
         cout << query.toString() << "? ";
-        Relation r = evaluatePredicate(query);
+        Relation r = evaluateQuery(query);
     }
 }
 
@@ -76,19 +76,17 @@ void Interpreter::evaluateRules() {
     int newTotalTuples;
     int passesThrough = 0;
     do {
-        // TODO: make sure least fixed point is working
         totalTuples = this->database.tupleCount();
         for (unsigned int i = 0; i < this->datalogProgram.Rules.size(); ++i) {
             cout << this->datalogProgram.Rules[i].toString() << "." << endl;
             evaluateRule(this->datalogProgram.Rules[i]);
         }
-        newTotalTuples = this->database.tupleCount();
         passesThrough++;
+        newTotalTuples = this->database.tupleCount();
     } while (totalTuples != newTotalTuples);
 
 
-
-    cout << "Schemes populated after " << passesThrough << " passes through the Rules." << endl << endl;
+    cout << endl << "Schemes populated after " << passesThrough << " passes through the Rules." << endl << endl;
 }
 
 Relation Interpreter::evaluateRule(Rule r) {
@@ -117,16 +115,16 @@ Relation Interpreter::evaluateRule(Rule r) {
         else {
             result = result.join(joinRelations.at(i));
         }
-
     }
     // pass in head predicate to get columns needed
     vector<int> headColumnsToProject = projectHelper(r.predicates[0]);
     // project, rename, union
     result = result.project(headColumnsToProject);
     Relation matchesHead = database.getMatchingRelationHelper(r.predicates[0]);
+    // rename scheme and rename the actual name
     result = result.rename(matchesHead.scheme);
-    database.unionWithDatabase(matchesHead);
-
+    result.name = matchesHead.name;
+    database.unionWithDatabase(result);
     return result;
 }
 
@@ -138,7 +136,7 @@ vector<int> Interpreter::projectHelper(Predicate head) {
     return headColumnsToProject;
 }
 
-Relation Interpreter::evaluatePredicate(Predicate& query) {
+Relation Interpreter::evaluateQuery(Predicate& query) {
     //Get Relation from Database with same name as predicate name in query
     Relation r = database.getMatchingRelationHelper(query);
 
@@ -179,11 +177,55 @@ Relation Interpreter::evaluatePredicate(Predicate& query) {
         r = r.rename(newScheme);
 
     }
-    // TODO: only use print helper if it's not a rule
     printHelper(r);
 
     return r;
 
+}
+
+Relation Interpreter::evaluatePredicate(Predicate& p) {
+    //Get Relation from Database with same name as predicate name in query
+    Relation r = database.getMatchingRelationHelper(p);
+
+    map<string, unsigned int> variablePositions;
+    bool seenBefore = false;
+    // make vector for indexes where variables were first seen
+    vector<int> newColNames;
+    // vector to rename columns to same as query variables
+    vector<string> newSchemeNames;
+
+    for (unsigned int i = 0; i < p.parameters.size(); i++) {
+        // for constants
+        if (p.parameters[i].isConstant) {
+            r = r.selectConstant(i, p.parameters[i].stringName);
+            newSchemeNames.push_back(p.parameters[i].stringName);
+        }
+            // for variables
+        else {
+            seenBefore = false;
+            // check if we've seen it before
+            for (auto mapItem: variablePositions) {
+                if (p.parameters[i].idName == mapItem.first){
+                    seenBefore = true;
+                    r = r.selectEqual(i, mapItem.second);
+                    newSchemeNames.push_back(p.parameters[i].idName);
+                }
+            }
+
+            if (!seenBefore) {
+                variablePositions.insert({(p.parameters[i].idName), i});
+                newColNames.push_back(i);
+                newSchemeNames.push_back(p.parameters[i].idName);
+            }
+        }
+
+        r = r.project(newColNames);
+        Scheme newScheme = Scheme(newSchemeNames);
+        r = r.rename(newScheme);
+
+    }
+
+    return r;
 }
 
 void Interpreter::printHelper(Relation r) {

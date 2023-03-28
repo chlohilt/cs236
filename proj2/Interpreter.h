@@ -31,6 +31,8 @@ public:
 
     Relation evaluatePredicate(Predicate& p);
 
+    Relation evaluateQuery(Predicate& query);
+
     vector<int> projectHelper(Predicate head);
 
 };

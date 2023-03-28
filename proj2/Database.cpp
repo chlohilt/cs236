@@ -35,14 +35,12 @@ int Database::tupleCount() {
 }
 
 void Database::unionWithDatabase(Relation r) {
-    Database database = *this;
-    for (unsigned int i = 0; i < database.collection.size(); ++i) {
-        if (database.collection.at(i).name == r.name) {
-            for (unsigned int i = 0; i < r.tuples.size(); ++i) {
-                set<int>::iterator it = r.tuples.begin();
-                advance(it, i);
-                //TODO: Fix set at function
-                database.collection.at(i).tuples.insert(r.tuples.at(r.tuples.begin(), i));
+    for (unsigned int i = 0; i < this->collection.size(); ++i) {
+        if (this->collection.at(i).name == r.name) {
+            for (auto itr: r.tuples) {
+                if (this->collection.at(i).tuples.insert(itr).second) {
+                    cout << itr.toString(r.scheme) << endl;
+                }
             }
         }
     }
