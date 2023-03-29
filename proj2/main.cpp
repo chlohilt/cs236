@@ -69,10 +69,10 @@ int main(int argc, char** argv) {
     string inputFileName = argv[1];
     ifstream input(inputFileName);
 
-/*    while (input.peek() != EOF) {
+    while (input.peek() != EOF) {
         inputString += input.get();
     }
-    input.close();*/
+    input.close();
 
     Scanner s = Scanner(inputString);
     queue<Token> tokens = s.mainScanner();

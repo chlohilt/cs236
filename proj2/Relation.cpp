@@ -120,6 +120,7 @@ Scheme Relation::combineSchemes(Relation left, Relation right) {
         newNames.push_back(rightScheme);
     }
     Scheme newScheme = Scheme(newNames);
+    return newScheme;
 }
 
 Tuple Relation::combineTuples(Tuple left, Tuple right) {
@@ -131,4 +132,5 @@ Tuple Relation::combineTuples(Tuple left, Tuple right) {
         newValues.push_back(rightValue);
     }
     Tuple newTuple = Tuple(newValues);
+    return newTuple;
 }

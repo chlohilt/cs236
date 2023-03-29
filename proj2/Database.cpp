@@ -34,12 +34,28 @@ int Database::tupleCount() {
     return totalTupleCount;
 }
 
-void Database::unionWithDatabase(Relation r) {
+void Database::unionWithDatabase(Relation r, Scheme originalScheme, Predicate head) {
+    vector<string> printedBefore;
+    bool printedBeforeBool = false;
+    vector<string> schemeValues;
+    for (unsigned int i = 0; i < head.parameters.size(); ++i) {
+        schemeValues.push_back(head.parameters.at(i).idName);
+    }
+    Scheme headScheme = Scheme(schemeValues);
+
     for (unsigned int i = 0; i < this->collection.size(); ++i) {
         if (this->collection.at(i).name == r.name) {
             for (auto itr: r.tuples) {
                 if (this->collection.at(i).tuples.insert(itr).second) {
-                    cout << itr.toString(r.scheme) << endl;
+                    for (unsigned int i = 0; i < printedBefore.size(); ++i) {
+                        if (itr.toStringPartTwo(originalScheme, r.scheme, headScheme) == printedBefore.at(i)) {
+                            printedBeforeBool = true;
+                        }
+                    }
+                    if (!printedBeforeBool) {
+                        cout << itr.toStringPartTwo(originalScheme, r.scheme, headScheme) << endl;
+                        printedBefore.push_back(itr.toStringPartTwo(originalScheme, r.scheme, headScheme));
+                    }
                 }
             }
         }

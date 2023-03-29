@@ -118,13 +118,14 @@ Relation Interpreter::evaluateRule(Rule r) {
     }
     // pass in head predicate to get columns needed
     vector<int> headColumnsToProject = projectHelper(r.predicates[0]);
+    Scheme originalScheme = result.scheme;
     // project, rename, union
     result = result.project(headColumnsToProject);
     Relation matchesHead = database.getMatchingRelationHelper(r.predicates[0]);
     // rename scheme and rename the actual name
     result = result.rename(matchesHead.scheme);
     result.name = matchesHead.name;
-    database.unionWithDatabase(result);
+    database.unionWithDatabase(result, originalScheme, r.predicates[0]);
     return result;
 }
 
