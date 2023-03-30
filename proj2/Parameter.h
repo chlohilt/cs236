@@ -1,6 +1,7 @@
 #include "Token.h"
 #pragma once
 
+
 class Parameter {
 private:
     string stringName;

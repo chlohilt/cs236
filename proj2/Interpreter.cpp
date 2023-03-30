@@ -117,10 +117,10 @@ Relation Interpreter::evaluateRule(Rule r) {
         }
     }
     // pass in head predicate to get columns needed
-    vector<int> headColumnsToProject = projectHelper(r.predicates[0]);
+    vector<int> headColumnsToProject = projectHelper(r.predicates[0], result.scheme);
     Scheme originalScheme = result.scheme;
     // project, rename, union
-    result = result.project(headColumnsToProject);
+    result = result.project2(headColumnsToProject);
     Relation matchesHead = database.getMatchingRelationHelper(r.predicates[0]);
     // rename scheme and rename the actual name
     result = result.rename(matchesHead.scheme);
@@ -129,11 +129,17 @@ Relation Interpreter::evaluateRule(Rule r) {
     return result;
 }
 
-vector<int> Interpreter::projectHelper(Predicate head) {
+vector<int> Interpreter::projectHelper(Predicate head, Scheme scheme) {
     vector<int> headColumnsToProject;
-    for (unsigned int i = 0; i < head.parameters.size(); ++i){
-        headColumnsToProject.push_back(i);
+    for (unsigned int i = 0; i < scheme.names.size(); ++i) {
+        for (auto parameter: head.parameters){
+            vector<int>::iterator it = find(headColumnsToProject.begin(), headColumnsToProject.end(), i);
+            if (it == headColumnsToProject.end()) {
+                headColumnsToProject.push_back(i);
+            }
+        }
     }
+
     return headColumnsToProject;
 }
 
@@ -173,11 +179,10 @@ Relation Interpreter::evaluateQuery(Predicate& query) {
             }
         }
 
-        r = r.project(newColNames);
-        Scheme newScheme = Scheme(newSchemeNames);
-        r = r.rename(newScheme);
-
     }
+    r = r.project2(newColNames);
+    Scheme newScheme = Scheme(newSchemeNames);
+    r = r.rename(newScheme);
     printHelper(r);
 
     return r;
@@ -219,12 +224,11 @@ Relation Interpreter::evaluatePredicate(Predicate& p) {
                 newSchemeNames.push_back(p.parameters[i].idName);
             }
         }
-
-        r = r.project(newColNames);
-        Scheme newScheme = Scheme(newSchemeNames);
-        r = r.rename(newScheme);
-
+        // to account for new column names pass in the head predicate that has the scheme needed or what?
     }
+    r = r.project2(newColNames);
+    Scheme newScheme = Scheme(newSchemeNames);
+    r = r.rename(newScheme);
 
     return r;
 }

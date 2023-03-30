@@ -9,9 +9,7 @@ Tuple::Tuple(vector<string> values) : vector<string>(values) {
     this->values = values;
 }
 
-Tuple::Tuple() {
-    this->values;
-}
+Tuple::Tuple() {}
 
 void Tuple::addValue(string value) {
     this->values.push_back(value);

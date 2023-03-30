@@ -43,10 +43,10 @@ void Database::unionWithDatabase(Relation r, Scheme originalScheme, Predicate he
     }
     Scheme headScheme = Scheme(schemeValues);
 
-    for (unsigned int i = 0; i < this->collection.size(); ++i) {
-        if (this->collection.at(i).name == r.name) {
+    for (auto& collectionValue: this->collection) {
+        if (collectionValue.name == r.name) {
             for (auto itr: r.tuples) {
-                if (this->collection.at(i).tuples.insert(itr).second) {
+                if (collectionValue.tuples.insert(itr).second) {
                     for (unsigned int i = 0; i < printedBefore.size(); ++i) {
                         if (itr.toStringPartTwo(originalScheme, r.scheme, headScheme) == printedBefore.at(i)) {
                             printedBeforeBool = true;

@@ -8,7 +8,6 @@
 #include "Token.h"
 #include <set>
 #include <vector>
-#include "Predicate.h"
 #include "Rule.h"
 
 class DatalogProgram {

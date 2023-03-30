@@ -33,7 +33,9 @@ public:
 
     Relation selectConstant(int index, const string& value) const;
 
-    Relation project(vector<int> posOfColsForResult);
+    Relation project1(vector<int> posOfColsForResult);
+
+    Relation project2(vector<int> posOfColsForResult);
 
     Relation selectEqual(int position1, int position2);
 

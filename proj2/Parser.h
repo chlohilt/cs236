@@ -1,7 +1,5 @@
+#pragma once
 #include "Token.h"
-#include "Predicate.h"
-#include "Parameter.h"
-#include "Rule.h"
 #include "DatalogProgram.h"
 #include <queue>
 #include <vector>

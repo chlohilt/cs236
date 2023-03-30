@@ -6,7 +6,6 @@
 #define INC_236_INTERPRETER_H
 #include "DatalogProgram.h"
 #include "Database.h"
-#include "Relation.h"
 
 
 class Interpreter {
@@ -33,7 +32,7 @@ public:
 
     Relation evaluateQuery(Predicate& query);
 
-    vector<int> projectHelper(Predicate head);
+    vector<int> projectHelper(Predicate head, Scheme originalScheme);
 
 };
 
