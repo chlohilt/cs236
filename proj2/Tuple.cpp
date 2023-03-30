@@ -9,6 +9,14 @@ Tuple::Tuple(vector<string> values) : vector<string>(values) {
     this->values = values;
 }
 
+Tuple::Tuple() {
+    this->values;
+}
+
+void Tuple::addValue(string value) {
+    this->values.push_back(value);
+}
+
 string Tuple::toString(const Scheme& scheme) const {
     const Tuple& tuple = *this;
     stringstream out;
@@ -45,13 +53,11 @@ string Tuple::toString(const Scheme& scheme) const {
                 if (numberOfGoodIterations < sizePrint - 1) {
                     out << ", ";
                 }
-
             }
             numberOfGoodIterations++;
             visitedAlready.push_back(scheme.names.at(nameValue));
         }
     }
-
     return out.str();
 }
 

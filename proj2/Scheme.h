@@ -14,6 +14,8 @@ public:
 
     Scheme(vector<string> names);
 
+    void addName(string name);
+
     void setNames(vector<string> moreNames);
 
     string getTopName();
@@ -23,5 +25,7 @@ public:
     friend class Database;
 
     friend class Interpreter;
+
+    friend class Relation;
 
 };

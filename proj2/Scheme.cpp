@@ -8,10 +8,14 @@ Scheme::Scheme(vector<string> names) : vector<string>(names) {
     this->names = names;
 }
 
-Scheme::Scheme() { };
+Scheme::Scheme() {};
 
 void Scheme::setNames(vector<string> moreNames) {
     this->names = moreNames;
+}
+
+void Scheme::addName(string name) {
+    this->names.push_back(name);
 }
 
 string Scheme::getTopName() {

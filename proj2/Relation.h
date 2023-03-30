@@ -23,6 +23,10 @@ public:
 
     Relation();
 
+    void newName(const string& name);
+
+    void newScheme(Scheme newScheme);
+
     void addTuple(const Tuple& tuple);
 
     string toString() const;

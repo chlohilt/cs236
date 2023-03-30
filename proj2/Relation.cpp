@@ -50,22 +50,35 @@ Relation Relation::selectEqual(int position1, int position2) {
     return results;
 }
 
-Relation Relation::project(vector<int> posOfColsForResult) {
-    int index = 0;
-    vector<string> values;
-    for (auto tuple: tuples) {
-        // this part uses the tuples values to set the schemes values
-        for (auto tValues: tuple.values) {
-            values.push_back(tValues);
-        }
+void Relation::newName(const string& name) {
+    this->name = name;
+}
 
-        for (auto p: posOfColsForResult) {
-            if (index == p) {
-                this->addTuple(tuple);
-            }
-        }
+void Relation::newScheme(Scheme newScheme) {
+    this->scheme = scheme;
+}
+
+Relation Relation::project(vector<int> posOfColsForResult) {
+    // go through columns and push to a new scheme, create a relation with that scheme
+    // then go through columns and tuples and push tuples at that column to the new relation
+    // return the relation
+    vector<string> values;
+    for(unsigned j = 0; j < posOfColsForResult.size(); j++) {
+        values.push_back(this->scheme.names.at(posOfColsForResult.at(j)));
     }
-    return *this;
+    Scheme tempScheme = Scheme(values);
+    Relation newRelation = Relation(this->name, tempScheme);
+
+    for (auto& tuple : tuples) {
+        vector<string> newValues;
+        for (unsigned int i = 0; i < posOfColsForResult.size(); i++){
+            newValues.push_back(tuple.at(posOfColsForResult.at(i)));
+        }
+        Tuple newTuple = Tuple(newValues);
+        newRelation.addTuple(newTuple);
+    }
+
+    return newRelation;
 }
 
 Relation Relation::rename(Scheme newScheme) {
@@ -96,7 +109,6 @@ bool Relation::joinable(const Scheme& leftScheme, const Scheme& rightScheme,
 Relation Relation::join(const Relation& right) {
     const Relation& left = *this;
     Scheme combinedScheme = combineSchemes(left, right);
-    // TODO: find what to name this--think it's the top scheme, check if this is right lol
     Relation result = Relation(combinedScheme.getTopName(), combinedScheme);
 
     for (const Tuple& leftTuple : left.tuples) {

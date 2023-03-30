@@ -13,6 +13,10 @@ public:
 
     Tuple(vector<string> values);
 
+    Tuple();
+
+    void addValue(string value);
+
     string toString(const Scheme& scheme) const;
 
     string toStringPartTwo(const Scheme& originalScheme, const Scheme& relationScheme, const Scheme& headScheme);
