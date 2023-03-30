@@ -50,6 +50,8 @@ void Database::unionWithDatabase(Relation r, Scheme originalScheme, Predicate he
                     for (unsigned int i = 0; i < printedBefore.size(); ++i) {
                         if (itr.toStringPartTwo(originalScheme, r.scheme, headScheme) == printedBefore.at(i)) {
                             printedBeforeBool = true;
+                        } else {
+                            printedBeforeBool = false;
                         }
                     }
                     if (!printedBeforeBool) {
