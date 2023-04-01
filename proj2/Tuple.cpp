@@ -47,7 +47,7 @@ string Tuple::toString(const Scheme& scheme) const {
             }
             vector<string>::iterator it = find(visitedAlready.begin(), visitedAlready.end(), scheme.names.at(nameValue));
             if (it == visitedAlready.end()) {
-                out << scheme.names.at(nameValue) << "=" << tuple.values.at(nameValue);
+                out << scheme.names.at(nameValue) << "=" << tuple.values.at(numberOfGoodIterations);
                 if (numberOfGoodIterations < sizePrint - 1) {
                     out << ", ";
                 }
@@ -83,7 +83,7 @@ string Tuple::toStringPartTwo(const Scheme& originalScheme, const Scheme& relati
         }
         visitedAlreadyPartTwo.push_back(relationScheme.names.at(nameValue));
     }
-    int numPrinted = 0;
+
     for (int nameValue = 0; unsigned(nameValue) < originalScheme.names.size(); nameValue++) {
         if (int((originalScheme.names.at(nameValue)).find("'")) == -1) {
             if (numberOfGoodIterations == 0) {

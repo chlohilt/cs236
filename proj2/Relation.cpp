@@ -24,7 +24,9 @@ void Relation::addTuple(const Tuple& tuple) {
 string Relation::toString() const {
     stringstream out;
     for (auto& tuple : tuples)
-        out << tuple.toString(this->scheme) << endl;
+        if (!tuple.values.empty()){
+            out << tuple.toString(this->scheme) << endl;
+        }
     return out.str();
 }
 

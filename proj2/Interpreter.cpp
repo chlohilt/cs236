@@ -137,7 +137,7 @@ vector<int> Interpreter::projectHelper(Predicate head, Scheme scheme) {
     // need to strip out the constants
     for (auto schemeName: scheme.names) {
         vector<string>::iterator itr = find(schemeWithoutConstants.begin(), schemeWithoutConstants.end(), schemeName);
-        if (schemeName.find("'") == -1 && itr == schemeWithoutConstants.end()) {
+        if (int(schemeName.find("'")) == -1 && itr == schemeWithoutConstants.end()) {
             schemeWithoutConstants.push_back(schemeName);
         }
     }
