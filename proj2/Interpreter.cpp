@@ -212,7 +212,7 @@ Relation Interpreter::evaluatePredicate(Predicate& p) {
         // for constants
         if (p.parameters[i].isConstant) {
             r = r.selectConstant(i, p.parameters[i].stringName);
-            newSchemeNames.push_back(p.parameters[i].stringName);
+            //newSchemeNames.push_back(p.parameters[i].stringName);
         }
             // for variables
         else {
