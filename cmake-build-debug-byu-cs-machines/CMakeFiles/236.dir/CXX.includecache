@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/users/guest/c/chloehi/ClionRemote/236/proj2/Database.cpp
-Database.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
-string
--
-
 /users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
 DatalogProgram.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.h
@@ -25,8 +19,6 @@ set
 -
 vector
 -
-Predicate.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Predicate.h
 Rule.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Rule.h
 
@@ -41,28 +33,10 @@ DatalogProgram.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.h
 Database.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
-Relation.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Relation.h
 
 /users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.h
 Token.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Token.h
-
-/users/guest/c/chloehi/ClionRemote/236/proj2/Parser.h
-Token.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Token.h
-Predicate.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Predicate.h
-Parameter.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.h
-Rule.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Rule.h
-DatalogProgram.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.h
-queue
--
-vector
--
 
 /users/guest/c/chloehi/ClionRemote/236/proj2/Predicate.h
 Token.h
@@ -90,24 +64,6 @@ Predicate.h
 vector
 -
 
-/users/guest/c/chloehi/ClionRemote/236/proj2/Scanner.h
-iostream
--
-cctype
--
-fstream
--
-list
--
-queue
--
-string
--
-bits/stdc++.h
--
-Token.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Token.h
-
 /users/guest/c/chloehi/ClionRemote/236/proj2/Scheme.h
 vector
 -
@@ -124,6 +80,12 @@ string
 sstream
 -
 
+/users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.cpp
+Tuple.h
+/users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.h
+sstream
+-
+
 /users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.h
 iostream
 -
@@ -131,24 +93,10 @@ string
 -
 vector
 -
+algorithm
+-
 Scheme.h
 /users/guest/c/chloehi/ClionRemote/236/proj2/Scheme.h
 
 /users/guest/c/chloehi/ClionRemote/236/proj2/main.cpp
-iostream
--
-Scanner.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Scanner.h
-Parser.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Parser.h
-Scheme.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Scheme.h
-Tuple.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.h
-Relation.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Relation.h
-Database.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
-Interpreter.h
-/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.h
 

@@ -73,17 +73,5 @@ CMakeFiles/236.dir/proj2/Tuple.cpp.o: ../proj2/Scheme.h
 CMakeFiles/236.dir/proj2/Tuple.cpp.o: ../proj2/Tuple.cpp
 CMakeFiles/236.dir/proj2/Tuple.cpp.o: ../proj2/Tuple.h
 
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Database.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/DatalogProgram.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Interpreter.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Parameter.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Parser.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Predicate.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Relation.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Rule.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Scanner.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Scheme.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Token.h
-CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/Tuple.h
 CMakeFiles/236.dir/proj2/main.cpp.o: ../proj2/main.cpp
 
