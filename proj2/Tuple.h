@@ -19,7 +19,7 @@ public:
 
     string toString(const Scheme& scheme) const;
 
-    string toStringPartTwo(const Scheme& originalScheme, const Scheme& relationScheme, const Scheme& headScheme);
+    string toStringPartTwo(const Scheme& originalScheme, const Scheme& relationScheme);
 
     friend class Relation;
 

@@ -48,15 +48,15 @@ void Database::unionWithDatabase(Relation r, Scheme originalScheme, Predicate he
             for (auto itr: r.tuples) {
                 if (collectionValue.tuples.insert(itr).second) {
                     for (unsigned int i = 0; i < printedBefore.size(); ++i) {
-                        if (itr.toStringPartTwo(originalScheme, r.scheme, headScheme) == printedBefore.at(i)) {
+                        if (itr.toStringPartTwo(headScheme, r.scheme) == printedBefore.at(i)) {
                             printedBeforeBool = true;
                         } else {
                             printedBeforeBool = false;
                         }
                     }
                     if (!printedBeforeBool) {
-                        cout << itr.toStringPartTwo(originalScheme, r.scheme, headScheme) << endl;
-                        printedBefore.push_back(itr.toStringPartTwo(originalScheme, r.scheme, headScheme));
+                        cout << itr.toStringPartTwo(headScheme, r.scheme) << endl;
+                        printedBefore.push_back(itr.toStringPartTwo(headScheme, r.scheme));
                     }
                 }
             }

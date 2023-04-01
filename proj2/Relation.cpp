@@ -100,8 +100,11 @@ Relation Relation::project2(vector<int> posOfColsForResult) {
 }
 
 Relation Relation::rename(Scheme newScheme) {
-    this->scheme = newScheme;
-    return *this;
+    Relation newRelation = Relation(this->name, newScheme);
+    for (auto tuple: this->tuples) {
+        newRelation.addTuple(tuple);
+    }
+    return newRelation;
 }
 
 bool Relation::joinable(const Scheme& leftScheme, const Scheme& rightScheme,

@@ -8,8 +8,6 @@
 Interpreter::Interpreter(DatalogProgram datalogProgram) {
     this->datalogProgram = datalogProgram;
     // create empty database
-/*    Database d = Database();
-    this->database = d;*/
     makeSchemeRelations();
     makeFactRelations();
     cout << "Rule Evaluation" << endl;
@@ -133,8 +131,7 @@ vector<int> Interpreter::projectHelper(Predicate head, Scheme scheme) {
     vector<int> headColumnsToProject;
     for (unsigned int i = 0; i < scheme.names.size(); ++i) {
         for (auto parameter: head.parameters){
-            vector<int>::iterator it = find(headColumnsToProject.begin(), headColumnsToProject.end(), i);
-            if (it == headColumnsToProject.end()) {
+            if (scheme.names.at(i) == parameter.idName) {
                 headColumnsToProject.push_back(i);
             }
         }
@@ -178,7 +175,6 @@ Relation Interpreter::evaluateQuery(Predicate& query) {
                 newSchemeNames.push_back(query.parameters[i].idName);
             }
         }
-
     }
     r = r.project2(newColNames);
     Scheme newScheme = Scheme(newSchemeNames);

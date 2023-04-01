@@ -59,7 +59,7 @@ string Tuple::toString(const Scheme& scheme) const {
     return out.str();
 }
 
-string Tuple::toStringPartTwo(const Scheme& originalScheme, const Scheme& relationScheme, const Scheme& headScheme) {
+string Tuple::toStringPartTwo(const Scheme& originalScheme, const Scheme& relationScheme) {
     const Tuple& tuple = *this;
     stringstream out;
     vector<string> visitedAlready;
@@ -85,20 +85,19 @@ string Tuple::toStringPartTwo(const Scheme& originalScheme, const Scheme& relati
     }
     int numPrinted = 0;
     for (int nameValue = 0; unsigned(nameValue) < originalScheme.names.size(); nameValue++) {
-        for (unsigned int i = 0; i < relationScheme.names.size(); ++i) {
-            if (int((relationScheme.names.at(i)).find("'")) == -1) {
-                if (numberOfGoodIterations == 0 && numPrinted == 0) {
-                    out << "  ";
-                }
-                if (headScheme.names.at(i) == originalScheme.names.at(nameValue)) {
-                    out << relationScheme.names.at(i) << "=" << tuple.values.at(nameValue);
-                    if (numPrinted < sizePrint - 1) {
-                        out << ", ";
-                    }
-                    numPrinted++;
-                }
-                numberOfGoodIterations++;
+        if (int((originalScheme.names.at(nameValue)).find("'")) == -1) {
+            if (numberOfGoodIterations == 0) {
+                out << "  ";
             }
+            vector<string>::iterator it = find(visitedAlready.begin(), visitedAlready.end(), originalScheme.names.at(nameValue));
+            if (it == visitedAlready.end()) {
+                out << relationScheme.names.at(nameValue) << "=" << tuple.values.at(nameValue);
+                if (numberOfGoodIterations < sizePrint - 1) {
+                    out << ", ";
+                }
+            }
+            numberOfGoodIterations++;
+            visitedAlready.push_back(originalScheme.names.at(nameValue));
         }
     }
     return out.str();

@@ -24,7 +24,7 @@ public:
 
     int tupleCount();
 
-    void unionWithDatabase(Relation r, Scheme originalScheme, Predicate head);
+    void unionWithDatabase(Relation r,  Scheme originalScheme, Predicate head);
 
     friend class Interpreter;
 
