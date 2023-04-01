@@ -129,9 +129,17 @@ Relation Interpreter::evaluateRule(Rule r) {
 
 vector<int> Interpreter::projectHelper(Predicate head, Scheme scheme) {
     vector<int> headColumnsToProject;
-    for (unsigned int i = 0; i < scheme.names.size(); ++i) {
-        for (auto parameter: head.parameters){
-            if (scheme.names.at(i) == parameter.idName) {
+    vector<string> schemeWithoutConstants;
+    // need to strip out the constants
+    for (auto schemeName: scheme.names) {
+        vector<string>::iterator itr = find(schemeWithoutConstants.begin(), schemeWithoutConstants.end(), schemeName);
+        if (schemeName.find("'") == -1 && itr == schemeWithoutConstants.end()) {
+            schemeWithoutConstants.push_back(schemeName);
+        }
+    }
+    for (auto parameter: head.parameters){
+        for (unsigned int i = 0; i < schemeWithoutConstants.size(); ++i) {
+            if (schemeWithoutConstants.at(i) == parameter.idName) {
                 headColumnsToProject.push_back(i);
             }
         }

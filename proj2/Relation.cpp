@@ -58,24 +58,6 @@ void Relation::newScheme(Scheme newScheme) {
     this->scheme = scheme;
 }
 
-Relation Relation::project1(vector<int> posOfColsForResult) {
-    int index = 0;
-    vector<string> values;
-    for (auto tuple: tuples) {
-        // this part uses the tuples values to set the schemes values
-        for (auto tValues: tuple.values) {
-            values.push_back(tValues);
-        }
-
-        for (auto p: posOfColsForResult) {
-            if (index == p) {
-                this->addTuple(tuple);
-            }
-        }
-    }
-    return *this;
-}
-
 Relation Relation::project2(vector<int> posOfColsForResult) {
     // go through columns and push to a new scheme, create a relation with that scheme
     // then go through columns and tuples and push tuples at that column to the new relation
