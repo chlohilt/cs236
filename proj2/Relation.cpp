@@ -95,11 +95,9 @@ bool Relation::joinable(const Scheme& leftScheme, const Scheme& rightScheme,
     for (unsigned int i = 0; i < leftScheme.size(); i++) {
         const string& leftName = leftScheme.at(i);
         const string& leftValue = leftTuple.at(i);
-        cout << "left name: " << leftName << " value: " << leftValue << endl;
         for (unsigned int j = 0; j < rightScheme.size(); j++) {
             const string& rightName = rightScheme.at(j);
             const string& rightValue = rightTuple.at(j);
-            cout << "right name: " << rightName << " value: " << rightValue << endl;
             if (rightName == leftName && rightValue != leftValue) {
                 isJoinable = false;
             }
@@ -117,7 +115,7 @@ Relation Relation::join(const Relation& right) {
     for (const Tuple& leftTuple : left.tuples) {
         for (const Tuple& rightTuple : right.tuples) {
             if (joinable(left.scheme, right.scheme, leftTuple, rightTuple)) {
-                Tuple newTuple = combineTuples(leftTuple, rightTuple);
+                Tuple newTuple = combineTuples(left.scheme, right.scheme, leftTuple, rightTuple);
                 result.addTuple(newTuple);
             }
         }
@@ -131,20 +129,44 @@ Scheme Relation::combineSchemes(Relation left, Relation right) {
     for (auto leftScheme: left.scheme) {
         newNames.push_back(leftScheme);
     }
+
     for (auto rightScheme: right.scheme) {
-        newNames.push_back(rightScheme);
+        vector<string>::iterator itr = find(newNames.begin(), newNames.end(), rightScheme);
+        if (itr == newNames.end()) {
+            newNames.push_back(rightScheme);
+        }
     }
+
     Scheme newScheme = Scheme(newNames);
     return newScheme;
 }
 
-Tuple Relation::combineTuples(Tuple left, Tuple right) {
+Tuple Relation::combineTuples(Scheme leftScheme, Scheme rightScheme, Tuple left, Tuple right) {
     vector<string> newValues;
+    vector<int> rightSchemeDuplicateIndex;
+    vector<string> newNames;
+
+    // first loop through the schemes to see where the duplicates are
+    for (auto leftName: leftScheme) {
+        newNames.push_back(leftName);
+    }
+
+    for (unsigned int i = 0; i < rightScheme.names.size(); ++i) {
+        vector<string>::iterator itr = find(newNames.begin(), newNames.end(), rightScheme.names.at(i));
+        if (itr != newNames.end()) {
+            rightSchemeDuplicateIndex.push_back(i);
+        }
+    }
+
+    // then loop through tuples, ignoring the duplicates
     for (auto leftValue: left.values) {
         newValues.push_back(leftValue);
     }
-    for (auto rightValue: right.values) {
-        newValues.push_back(rightValue);
+    for (unsigned int i = 0; i < right.values.size(); ++i) {
+        vector<int>::iterator itr = find(rightSchemeDuplicateIndex.begin(), rightSchemeDuplicateIndex.end(), i);
+        if (itr == rightSchemeDuplicateIndex.end()) {
+            newValues.push_back(right.values.at(i));
+        }
     }
     Tuple newTuple = Tuple(newValues);
     return newTuple;

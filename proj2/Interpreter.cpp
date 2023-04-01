@@ -83,7 +83,6 @@ void Interpreter::evaluateRules() {
         newTotalTuples = this->database.tupleCount();
     } while (totalTuples != newTotalTuples);
 
-
     cout << endl << "Schemes populated after " << passesThrough << " passes through the Rules." << endl << endl;
 }
 
@@ -102,16 +101,21 @@ Relation Interpreter::evaluateRule(Rule r) {
         }
     }
 // join the result relations if there is more than one
-    for (unsigned int i = 0; i < joinRelations.size(); ++i) {
-        // first combine the first two result relations
-        if (i == 0) {
-            result = joinRelations.at(i).join(joinRelations.at(i + 1));
-            joinRelations.erase(joinRelations.begin() + i);
-            joinRelations.erase(joinRelations.begin() + (i + 1));
-        }
-        // then combine result from that join with every other relation
-        else {
-            result = result.join(joinRelations.at(i));
+    bool oneJoinDone = false;
+    while (!joinRelations.empty()){
+        for (unsigned int i = 0; i < joinRelations.size(); ++i) {
+            // first combine the first two result relations
+            if (!oneJoinDone) {
+                result = joinRelations.at(i).join(joinRelations.at(i + 1));
+                joinRelations.erase(joinRelations.begin());
+                joinRelations.erase(joinRelations.begin());
+                oneJoinDone = true;
+            }
+                // then combine result from that join with every other relation
+            else {
+                result = result.join(joinRelations.at(i));
+                joinRelations.erase(joinRelations.begin() + i);
+            }
         }
     }
     // pass in head predicate to get columns needed

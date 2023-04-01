@@ -45,7 +45,7 @@ public:
 
     Scheme combineSchemes(Relation r1, Relation r2);
 
-    Tuple combineTuples(Tuple t1, Tuple t2);
+    Tuple combineTuples(Scheme leftScheme, Scheme rightScheme, Tuple t1, Tuple t2);
 
     friend class Database;
 
