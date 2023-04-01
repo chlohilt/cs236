@@ -39,6 +39,9 @@ queue<Token> Scanner::mainScanner() {
             else if (otherCaseCheck(currentChar)) {
                 TokenList.push(checkOtherStrings(currentString));
             }
+            else if (commentCheck(currentChar)) {
+                commentCase(currentString);
+            }
             else {
                 TokenList.push(scanToken(currentString));
                 currentString = currentString.substr(1);
@@ -85,7 +88,16 @@ bool Scanner::letterCheck(char currentChar) {
 }
 
 bool Scanner::otherCaseCheck(char currentChar) {
-    if (currentChar == '\'' || currentChar == ':' || currentChar == '#') {
+    if (currentChar == '\'' || currentChar == ':') {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool Scanner::commentCheck(char currentChar) {
+    if (currentChar == '#') {
         return true;
     }
     else {
@@ -100,6 +112,56 @@ bool Scanner::digitCheck(char currentChar) {
     }
     else {
         return false;
+    }
+}
+
+void Scanner::commentCase(string& currentString) {
+    char currentChar = currentString[0];
+    stringstream valueToPassStream;
+    valueToPassStream << currentChar;
+    string valueToPass = valueToPassStream.str();
+    if (currentChar == '#') {
+        // find either end of line/file or other # for end of block comment
+        // multi block comment needs some stuff in between it that has letters on new line/ the new line is at an index less than the new #
+        string searchString = currentString.substr(1);
+        int endBlockComment = searchString.find('#');
+        int startSecondLineComment = searchString.find("\n");
+        string startLooking = currentString.substr(startSecondLineComment);
+        char lookingChar = startLooking.at(0);
+        while (isWhitespace(lookingChar)) {
+            if (lookingChar == '\n') {
+                line++;
+            }
+            if (currentString != "" && currentString != "\n") {
+                currentString = currentString.substr(1);
+                lookingChar = currentString.at(0);
+            }
+            else {
+                currentString = "";
+                break;
+            }
+        }
+
+        char startSecondLineCommentChar = currentString.at(0);
+        // need to check if a new # is found
+        // if it is we also need to check that it is on the next line and
+        // that the first char of the next line isn't also a #
+
+        if ((endBlockComment != -1) && (startSecondLineComment < endBlockComment) && (startSecondLineCommentChar != '#')) {
+            string multiLineComment = currentString.substr(0, endBlockComment + 2);
+            currentString = currentString.substr(endBlockComment + 2);
+        }
+        else {
+            int endComment = searchString.find('\n');
+            if (endComment != -1) {
+                string comment = currentString.substr(0, endComment + 1);
+                currentString = currentString.substr(endComment + 1);
+            }
+            else {
+                string commentToEnd = currentString;
+                currentString = "";
+            }
+        }
     }
 }
 
@@ -147,53 +209,6 @@ Token Scanner::checkOtherStrings(string & currentString) {
         }
         currentString = currentString.substr(1);
         return Token (COLON, valueToPass, line);
-    }
-        // comment case
-    else if (currentChar == '#') {
-        // find either end of line/file or other # for end of block comment
-        // multi block comment needs some stuff in between it that has letters on new line/ the new line is at an index less than the new #
-        string searchString = currentString.substr(1);
-        int endBlockComment = searchString.find('#');
-        int startSecondLineComment = searchString.find("\n");
-        string startLooking = currentString.substr(startSecondLineComment);
-        char lookingChar = startLooking.at(0);
-        while (isWhitespace(lookingChar)) {
-            if (lookingChar == '\n') {
-                line++;
-            }
-            if (currentString != "" && currentString != "\n") {
-                currentString = currentString.substr(1);
-                lookingChar = currentString.at(0);
-            }
-            else {
-                currentString = "";
-                break;
-            }
-        }
-
-        char startSecondLineCommentChar = currentString.at(0);
-        // need to check if a new # is found
-        // if it is we also need to check that it is on the next line and
-        // that the first char of the next line isn't also a #
-
-        if ((endBlockComment != -1) && (startSecondLineComment < endBlockComment) && (startSecondLineCommentChar != '#')) {
-            string multiLineComment = currentString.substr(0, endBlockComment + 2);
-            currentString = currentString.substr(endBlockComment + 2);
-            return Token (COMMENT, multiLineComment, line);
-        }
-        else {
-            int endComment = searchString.find('\n');
-            if (endComment != -1) {
-                string comment = currentString.substr(0, endComment + 1);
-                currentString = currentString.substr(endComment + 1);
-                return Token (COMMENT, comment, line);
-            }
-            else {
-                string commentToEnd = currentString;
-                currentString = "";
-                return Token (COMMENT, commentToEnd, line);
-            }
-        }
     }
     else if (currentChar == '\'') {
         // find new ' to find end of comment

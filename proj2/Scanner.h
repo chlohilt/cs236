@@ -29,6 +29,8 @@ public:
 
     bool otherCaseCheck(char currentChar);
 
+    bool commentCheck(char currentChar);
+
     // this function check if the current character is a digit
     bool digitCheck(char currentChar);
 
@@ -37,7 +39,9 @@ public:
     // else pass into token thing
     Token stringCheck(string checkString);
 
-    // this function check for comments, colon dashes, and strings
+    void commentCase(string& currentString);
+
+    // this function check for colon dashes and strings
     Token checkOtherStrings(string & currentString);
 
     // this function scans in values to see if it is a certain character

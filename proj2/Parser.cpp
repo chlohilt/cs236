@@ -237,7 +237,6 @@ void Parser::parameterList(vector<Parameter> &currParamList) { // pass the curre
 DatalogProgram Parser::datalogProgram() {
     DatalogProgram d = DatalogProgram();
     try {
-        match(COMMENT);
         // SCHEMES
         match(SCHEMES);
         match(COLON);
