@@ -177,6 +177,33 @@ proj2/DatalogProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/DatalogProgram.cpp.s
 .PHONY : proj2/DatalogProgram.cpp.s
 
+proj2/Graph.o: proj2/Graph.cpp.o
+
+.PHONY : proj2/Graph.o
+
+# target to build an object file
+proj2/Graph.cpp.o:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Graph.cpp.o
+.PHONY : proj2/Graph.cpp.o
+
+proj2/Graph.i: proj2/Graph.cpp.i
+
+.PHONY : proj2/Graph.i
+
+# target to preprocess a source file
+proj2/Graph.cpp.i:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Graph.cpp.i
+.PHONY : proj2/Graph.cpp.i
+
+proj2/Graph.s: proj2/Graph.cpp.s
+
+.PHONY : proj2/Graph.s
+
+# target to generate assembly for a file
+proj2/Graph.cpp.s:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Graph.cpp.s
+.PHONY : proj2/Graph.cpp.s
+
 proj2/Interpreter.o: proj2/Interpreter.cpp.o
 
 .PHONY : proj2/Interpreter.o
@@ -203,6 +230,33 @@ proj2/Interpreter.s: proj2/Interpreter.cpp.s
 proj2/Interpreter.cpp.s:
 	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Interpreter.cpp.s
 .PHONY : proj2/Interpreter.cpp.s
+
+proj2/Node.o: proj2/Node.cpp.o
+
+.PHONY : proj2/Node.o
+
+# target to build an object file
+proj2/Node.cpp.o:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Node.cpp.o
+.PHONY : proj2/Node.cpp.o
+
+proj2/Node.i: proj2/Node.cpp.i
+
+.PHONY : proj2/Node.i
+
+# target to preprocess a source file
+proj2/Node.cpp.i:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Node.cpp.i
+.PHONY : proj2/Node.cpp.i
+
+proj2/Node.s: proj2/Node.cpp.s
+
+.PHONY : proj2/Node.s
+
+# target to generate assembly for a file
+proj2/Node.cpp.s:
+	$(MAKE) -f CMakeFiles/236.dir/build.make CMakeFiles/236.dir/proj2/Node.cpp.s
+.PHONY : proj2/Node.cpp.s
 
 proj2/Parameter.o: proj2/Parameter.cpp.o
 
@@ -489,9 +543,15 @@ help:
 	@echo "... proj2/DatalogProgram.o"
 	@echo "... proj2/DatalogProgram.i"
 	@echo "... proj2/DatalogProgram.s"
+	@echo "... proj2/Graph.o"
+	@echo "... proj2/Graph.i"
+	@echo "... proj2/Graph.s"
 	@echo "... proj2/Interpreter.o"
 	@echo "... proj2/Interpreter.i"
 	@echo "... proj2/Interpreter.s"
+	@echo "... proj2/Node.o"
+	@echo "... proj2/Node.i"
+	@echo "... proj2/Node.s"
 	@echo "... proj2/Parameter.o"
 	@echo "... proj2/Parameter.i"
 	@echo "... proj2/Parameter.s"

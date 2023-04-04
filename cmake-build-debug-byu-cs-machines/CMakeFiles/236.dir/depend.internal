@@ -31,6 +31,9 @@ CMakeFiles/236.dir/proj2/Interpreter.cpp.o
  /users/guest/c/chloehi/ClionRemote/236/proj2/Scheme.h
  /users/guest/c/chloehi/ClionRemote/236/proj2/Token.h
  /users/guest/c/chloehi/ClionRemote/236/proj2/Tuple.h
+CMakeFiles/236.dir/proj2/Node.cpp.o
+ /users/guest/c/chloehi/ClionRemote/236/proj2/Node.cpp
+ /users/guest/c/chloehi/ClionRemote/236/proj2/Node.h
 CMakeFiles/236.dir/proj2/Parameter.cpp.o
  /users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.cpp
  /users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.h
@@ -77,6 +80,7 @@ CMakeFiles/236.dir/proj2/main.cpp.o
  /users/guest/c/chloehi/ClionRemote/236/proj2/Database.h
  /users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.h
  /users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.h
+ /users/guest/c/chloehi/ClionRemote/236/proj2/Node.h
  /users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.h
  /users/guest/c/chloehi/ClionRemote/236/proj2/Parser.h
  /users/guest/c/chloehi/ClionRemote/236/proj2/Predicate.h

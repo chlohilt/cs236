@@ -94,10 +94,22 @@
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.h">
 			<Option target="236"/>
 		</Unit>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Graph.cpp">
+			<Option target="236"/>
+		</Unit>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Graph.h">
+			<Option target="236"/>
+		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.cpp">
 			<Option target="236"/>
 		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.h">
+			<Option target="236"/>
+		</Unit>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Node.cpp">
+			<Option target="236"/>
+		</Unit>
+		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Node.h">
 			<Option target="236"/>
 		</Unit>
 		<Unit filename="/users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.cpp">

@@ -6,7 +6,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/users/guest/c/chloehi/ClionRemote/236/proj2/Database.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/Database.cpp.o"
   "/users/guest/c/chloehi/ClionRemote/236/proj2/DatalogProgram.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/DatalogProgram.cpp.o"
+  "/users/guest/c/chloehi/ClionRemote/236/proj2/Graph.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/Graph.cpp.o"
   "/users/guest/c/chloehi/ClionRemote/236/proj2/Interpreter.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/Interpreter.cpp.o"
+  "/users/guest/c/chloehi/ClionRemote/236/proj2/Node.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/Node.cpp.o"
   "/users/guest/c/chloehi/ClionRemote/236/proj2/Parameter.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/Parameter.cpp.o"
   "/users/guest/c/chloehi/ClionRemote/236/proj2/Parser.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/Parser.cpp.o"
   "/users/guest/c/chloehi/ClionRemote/236/proj2/Predicate.cpp" "/users/guest/c/chloehi/ClionRemote/236/cmake-build-debug-byu-cs-machines/CMakeFiles/236.dir/proj2/Predicate.cpp.o"
