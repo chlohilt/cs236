@@ -23,7 +23,7 @@ public:
 
     void evaluateQueries();
 
-    void evaluateRules();
+    void evaluateRules(vector<vector<int>> scComponents);
 
     Relation evaluateRule(Rule r);
 

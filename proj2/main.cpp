@@ -32,7 +32,8 @@ int main() {
     cout << graph.toString();
     cout << "Reverse Dependency Graph" << endl;
     cout << reverseGraph.toString();
-    reverseGraph.dfs();
+    stack<int> postOrder = reverseGraph.dfs();
+    vector<vector<int>> scComponents = graph.dfsForestReversePostOrder(postOrder);
 
 }
 

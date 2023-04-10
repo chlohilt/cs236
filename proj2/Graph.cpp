@@ -43,31 +43,68 @@ Graph Graph::reverseDependencyGraph() {
 
 }
 
-void Graph::explore(Node& node) {
+void Graph::explore(int ruleNum, Node& node) {
     node.visitedAlready = true;
     for (auto &edge: node.adjacentNodeIDs) {
         for (auto& graphNode: this->nodes) {
             if (graphNode.first == edge) {
                 if (!graphNode.second.visitedAlready) {
-                    cout << "node ID: " << graphNode.first << endl;
-                    explore(graphNode.second);
+                    explore(edge, graphNode.second);
                 }
             }
         }
     }
+    // push rule number to the stack
+    postOrder.push(ruleNum);
+    cout << "node ID: " << ruleNum << endl;
 }
 
-void Graph::dfs() {
+stack<int> Graph::dfs() {
     for (auto &allNode: this->nodes) {
         allNode.second.visitedAlready = false;
     }
     for (auto &node: this->nodes) {
         if (!node.second.visitedAlready) {
-            explore(node.second);
+            explore(node.first, node.second);
         }
     }
+
+    return postOrder;
 }
 
-void Graph::dfsForest() {
+vector<vector<int>> Graph::dfsForestReversePostOrder(stack<int> postOrderStack) {
+    vector<vector<int>> scComponents;
+    for (auto &allNode: this->nodes) {
+        allNode.second.visitedAlready = false;
+    }
 
+    while (!postOrderStack.empty()) {
+        vector<int> oneScComponent;
+        for (auto &node: this->nodes) {
+            if (node.first == postOrderStack.top()) {
+                if (!node.second.visitedAlready) {
+                    oneScComponent = explorePartTwo(oneScComponent, node.first, node.second);
+                    scComponents.push_back(oneScComponent);
+                }
+            }
+        }
+        postOrderStack.pop();
+    }
+    return scComponents;
+
+}
+
+vector<int> Graph::explorePartTwo(vector<int>& oneScComponent, int ruleNum, Node& node) {
+    node.visitedAlready = true;
+    for (auto &edge: node.adjacentNodeIDs) {
+        for (auto& graphNode: this->nodes) {
+            if (graphNode.first == edge) {
+                if (!graphNode.second.visitedAlready) {
+                    oneScComponent = explorePartTwo(oneScComponent, edge, graphNode.second);
+                }
+            }
+        }
+    }
+    oneScComponent.push_back(ruleNum);
+    return oneScComponent;
 }

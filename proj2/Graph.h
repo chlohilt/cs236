@@ -7,12 +7,15 @@
 #include "Node.h"
 #include <map>
 #include "Rule.h"
+#include <stack>
 
 class Graph {
 
 private:
 
     map<int,Node> nodes;
+
+    stack<int> postOrder;
 
 public:
 
@@ -26,11 +29,13 @@ public:
 
     Graph reverseDependencyGraph();
 
-    void dfs();
+    stack<int> dfs();
 
-    void explore(Node& node);
+    void explore(int ruleNum, Node& node);
 
-    void dfsForest();
+    vector<vector<int>> dfsForestReversePostOrder(stack<int> postOrderStack);
+
+    vector<int> explorePartTwo(vector<int>& oneScComponent, int ruleNum, Node& node);
 
 };
 

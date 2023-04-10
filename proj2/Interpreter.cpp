@@ -14,7 +14,10 @@ Interpreter::Interpreter(DatalogProgram datalogProgram) {
     this->graph = makeGraph(datalogProgram.Rules);
     cout << graph.toString();
     Graph reverseDependencyGraph = graph.reverseDependencyGraph();
+    //TODO: take out this to string--only here for testing purposes
     reverseDependencyGraph.toString();
+    stack<int> postOrder = reverseDependencyGraph.dfs();
+    vector<vector<int>> scComponents = graph.dfsForestReversePostOrder(postOrder);
     cout << "Rule Evaluation" << endl;
     evaluateRules();
     cout << "Query Evaluation" << endl;
@@ -74,10 +77,11 @@ void Interpreter::evaluateQueries() {
     }
 }
 
-void Interpreter::evaluateRules() {
+void Interpreter::evaluateRules(vector<vector<int>> scComponents) {
     int totalTuples;
     int newTotalTuples;
     int passesThrough = 0;
+    //TODO: loop through scComponents and evaluate Rules there
     do {
         totalTuples = this->database.tupleCount();
         for (unsigned int i = 0; i < this->datalogProgram.Rules.size(); ++i) {
