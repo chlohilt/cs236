@@ -2,8 +2,24 @@
 
 Rule::Rule() {}
 
+Rule::Rule(Predicate headPredicate) {
+    predicates.push_back(headPredicate);
+}
+
+void Rule::addBodyPredicate(Predicate bodyPredicate) {
+    predicates.push_back(bodyPredicate);
+}
+
 void Rule::setPredicates(vector<Predicate> predicates) {
     this->predicates = predicates;
+}
+
+Predicate Rule::getBodyPredicate(int predicateIndex) {
+    return predicates[predicateIndex];
+}
+
+Predicate Rule::getHeadPredicate() {
+    return predicates[0];
 }
 
 void Rule::setName(string name) {

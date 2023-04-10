@@ -10,6 +10,11 @@ Interpreter::Interpreter(DatalogProgram datalogProgram) {
     // create empty database
     makeSchemeRelations();
     makeFactRelations();
+    cout << "Dependency Graph" << endl;
+    this->graph = makeGraph(datalogProgram.Rules);
+    cout << graph.toString();
+    Graph reverseDependencyGraph = graph.reverseDependencyGraph();
+    reverseDependencyGraph.toString();
     cout << "Rule Evaluation" << endl;
     evaluateRules();
     cout << "Query Evaluation" << endl;
@@ -250,4 +255,33 @@ void Interpreter::printHelper(Relation r) {
         // only print those with variables
         cout << r.toString();
     }
+}
+
+Graph Interpreter::makeGraph(const vector<Rule>& rules) {
+    Graph graph(rules.size());
+    // predicate name in the body of the 'from' rule matches the predicate name in the head of the 'to' rule,
+    // add an edge in the graph
+    for (unsigned fromID = 0; fromID < rules.size(); fromID++) {
+        Rule fromRule = rules.at(fromID);
+        //cout << "from rule R" << fromID << ": " << fromRule.toString() << endl;
+        for (unsigned pred = 0; pred < fromRule.predicates.size(); pred++) {
+            // only printing the body predicates
+            if (pred != 0) {
+                Predicate bodyPred = fromRule.getBodyPredicate(pred);
+                //cout << "from body predicate: " << bodyPred.toString() << endl;
+
+                for (unsigned toID = 0; toID < rules.size(); toID++) {
+                    Rule toRule = rules.at(toID);
+                    //cout << "to rule R" << toID << ": " << toRule.toString() << endl;
+                    if (bodyPred.toString() == toRule.getHeadPredicate().toString()) {
+                        graph.addEdge(fromID, toID);
+                        //cout << "dependency found: (R" << fromID << ",R" << toID << ")" << endl;
+                    }
+                }
+            }
+
+        }
+    }
+    return graph;
+
 }

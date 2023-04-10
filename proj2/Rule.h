@@ -10,7 +10,15 @@ private:
 public:
     Rule();
 
+    Rule(Predicate headPredicate);
+
+    void addBodyPredicate(Predicate bodyPredicate);
+
     void setName(string name);
+
+    Predicate getBodyPredicate(int predicateIndex);
+
+    Predicate getHeadPredicate();
 
     string toString();
 
@@ -19,5 +27,7 @@ public:
     friend class Parser;
 
     friend class Interpreter;
+
+    friend class Graph;
 
 };

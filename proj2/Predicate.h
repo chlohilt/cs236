@@ -11,6 +11,8 @@ private:
 public:
     Predicate();
 
+    Predicate(string id);
+
     string toString();
 
     void setId(string idName);

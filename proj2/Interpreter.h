@@ -6,12 +6,13 @@
 #define INC_236_INTERPRETER_H
 #include "DatalogProgram.h"
 #include "Database.h"
-
+#include "Graph.h"
 
 class Interpreter {
 private:
     DatalogProgram datalogProgram;
     Database database;
+    Graph graph;
 
 public:
     Interpreter(DatalogProgram datalogProgram);
@@ -33,6 +34,8 @@ public:
     Relation evaluateQuery(Predicate& query);
 
     vector<int> projectHelper(Predicate head, Scheme originalScheme);
+
+    static Graph makeGraph(const vector<Rule>& rules);
 
 };
 

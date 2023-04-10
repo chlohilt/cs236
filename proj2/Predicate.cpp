@@ -2,6 +2,10 @@
 
 Predicate::Predicate() {}
 
+Predicate::Predicate(string id) {
+    this->id = id;
+}
+
 void Predicate::setId(string idName) {
     this->id = idName;
 }
@@ -23,6 +27,10 @@ string Predicate::toString() {
         } else if (parameters[i].idName.length() != 0) {
             ss << parameters[i].idName << ",";
         }
+    }
+    // if there are no parameters
+    if (parameters.size() == 0) {
+        ss << ")";
     }
 
     return ss.str();
