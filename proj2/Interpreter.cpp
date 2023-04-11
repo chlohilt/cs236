@@ -19,7 +19,7 @@ Interpreter::Interpreter(DatalogProgram datalogProgram) {
     stack<int> postOrder = reverseDependencyGraph.dfs();
     vector<vector<int>> scComponents = graph.dfsForestReversePostOrder(postOrder);
     cout << "Rule Evaluation" << endl;
-    evaluateRules();
+    evaluateRules(scComponents);
     cout << "Query Evaluation" << endl;
     evaluateQueries();
 }
@@ -82,17 +82,18 @@ void Interpreter::evaluateRules(vector<vector<int>> scComponents) {
     int newTotalTuples;
     int passesThrough = 0;
     //TODO: loop through scComponents and evaluate Rules there
-    do {
-        totalTuples = this->database.tupleCount();
-        for (unsigned int i = 0; i < this->datalogProgram.Rules.size(); ++i) {
-            cout << this->datalogProgram.Rules[i].toString() << "." << endl;
-            evaluateRule(this->datalogProgram.Rules[i]);
-        }
+    for (auto scComponentVector: scComponents) {
         passesThrough++;
-        newTotalTuples = this->database.tupleCount();
-    } while (totalTuples != newTotalTuples);
-
-    cout << endl << "Schemes populated after " << passesThrough << " passes through the Rules." << endl << endl;
+        for (auto scComponent: scComponentVector) {
+            cout << "SCC: R" << scComponent << endl;
+            cout << this->datalogProgram.Rules[scComponent].toString() << "." << endl;
+        }
+    }
+    if (passesThrough != 0) {
+        cout << endl << "Schemes populated after " << passesThrough << " passes through the Rules." << endl << endl;
+    } else {
+        cout << endl;
+    }
 }
 
 Relation Interpreter::evaluateRule(Rule r) {

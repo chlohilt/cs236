@@ -24,6 +24,8 @@ string Graph::toString() {
         out << node.toString() << endl;
     }
 
+    out << endl;
+
     return out.str();
 }
 
