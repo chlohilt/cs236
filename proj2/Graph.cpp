@@ -31,6 +31,10 @@ string Graph::toString() {
 
 Graph Graph::reverseDependencyGraph() {
     Graph newGraph = Graph();
+    newGraph.nodes = this->nodes;
+    for (auto& newGraphNode: newGraph.nodes) {
+        newGraphNode.second.adjacentNodeIDs.clear();
+    }
     for (auto& node: this->nodes) {
         int nodeID = node.first;
         for (auto &secondIteration: this->nodes) {
@@ -58,7 +62,6 @@ void Graph::explore(int ruleNum, Node& node) {
     }
     // push rule number to the stack
     postOrder.push(ruleNum);
-    cout << "node ID: " << ruleNum << endl;
 }
 
 stack<int> Graph::dfs() {

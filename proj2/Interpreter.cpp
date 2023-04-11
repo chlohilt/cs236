@@ -14,8 +14,6 @@ Interpreter::Interpreter(DatalogProgram datalogProgram) {
     this->graph = makeGraph(datalogProgram.Rules);
     cout << graph.toString();
     Graph reverseDependencyGraph = graph.reverseDependencyGraph();
-    //TODO: take out this to string--only here for testing purposes
-    reverseDependencyGraph.toString();
     stack<int> postOrder = reverseDependencyGraph.dfs();
     vector<vector<int>> scComponents = graph.dfsForestReversePostOrder(postOrder);
     cout << "Rule Evaluation" << endl;
@@ -81,25 +79,31 @@ void Interpreter::evaluateRules(vector<vector<int>> scComponents) {
     int totalTuples;
     int newTotalTuples;
     int passesThrough = 0;
-    //TODO: loop through scComponents and evaluate Rules there
     for (auto scComponentVector: scComponents) {
-        passesThrough++;
         for (auto scComponent: scComponentVector) {
+            ++passesThrough;
             cout << "SCC: R" << scComponent << endl;
             cout << this->datalogProgram.Rules[scComponent].toString() << "." << endl;
+            evaluateRule(this->datalogProgram.Rules[scComponent]);
+            if (passesThrough != 0) {
+                cout << passesThrough << " passes: R" << scComponent << endl;
+                passesThrough = 0;
+            } else {
+                cout << endl;
+            }
         }
     }
-    if (passesThrough != 0) {
-        cout << endl << "Schemes populated after " << passesThrough << " passes through the Rules." << endl << endl;
-    } else {
-        cout << endl;
-    }
+
+    cout << endl;
+
 }
 
 Relation Interpreter::evaluateRule(Rule r) {
     Relation result;
     vector<Relation> joinRelations;
+    //TODO: move this to another function so I can return the int of passes Through
     for (unsigned int i = 0; i < r.predicates.size(); ++i) {
+        cout << "loop through predicates " << i << endl;
         // skip first one since it's on the left hand side of the rule
         // then evaluate same way as queries
         if (i != 0 && r.predicates.size() == 2) {
@@ -278,7 +282,7 @@ Graph Interpreter::makeGraph(const vector<Rule>& rules) {
                 for (unsigned toID = 0; toID < rules.size(); toID++) {
                     Rule toRule = rules.at(toID);
                     //cout << "to rule R" << toID << ": " << toRule.toString() << endl;
-                    if (bodyPred.toString() == toRule.getHeadPredicate().toString()) {
+                    if (bodyPred.id == toRule.getHeadPredicate().id) {
                         graph.addEdge(fromID, toID);
                         //cout << "dependency found: (R" << fromID << ",R" << toID << ")" << endl;
                     }
