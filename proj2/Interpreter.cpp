@@ -18,7 +18,7 @@ Interpreter::Interpreter(DatalogProgram datalogProgram) {
     vector<vector<int>> scComponents = graph.dfsForestReversePostOrder(postOrder);
     cout << "Rule Evaluation" << endl;
     evaluateRules(scComponents);
-    cout << "Query Evaluation" << endl;
+    cout << endl << "Query Evaluation" << endl;
     evaluateQueries();
 }
 
@@ -80,21 +80,62 @@ void Interpreter::evaluateRules(vector<vector<int>> scComponents) {
     int newTotalTuples;
     int passesThrough = 0;
     for (auto scComponentVector: scComponents) {
-        for (auto scComponent: scComponentVector) {
+        passesThrough = 0;
+        // first check if it's one rule and not dependent only on itself
+        bool foundDependency = false;
+        for (auto pos: this->graph.nodes) {
+            if (pos.first == scComponentVector[0]) {
+                for (auto dependentPossibility: pos.second.adjacentNodeIDs) {
+                    if (dependentPossibility == scComponentVector[0]) {
+                        foundDependency = true;
+                    }
+                }
+            }
+        }
+
+        if (scComponentVector.size() == 1 && !foundDependency) {
+            cout << "SCC: R" << scComponentVector[0] << endl;
+            cout << this->datalogProgram.Rules[scComponentVector[0]].toString() << "." << endl;
+            evaluateRule(this->datalogProgram.Rules[scComponentVector[0]]);
             ++passesThrough;
-            cout << "SCC: R" << scComponent << endl;
-            cout << this->datalogProgram.Rules[scComponent].toString() << "." << endl;
-            evaluateRule(this->datalogProgram.Rules[scComponent]);
-            if (passesThrough != 0) {
-                cout << passesThrough << " passes: R" << scComponent << endl;
-                passesThrough = 0;
-            } else {
-                cout << endl;
+        } else {
+            sort(scComponentVector.begin(), scComponentVector.end());
+            cout << "SCC: R";
+            for (auto scComponent: scComponentVector) {
+                auto it = find(scComponentVector.begin(), scComponentVector.end(), scComponent);
+                int index = it - scComponentVector.begin();
+                if (index != scComponentVector.size() - 1) {
+                    cout << scComponent << ",R";
+                } else {
+                    cout << scComponent << endl;
+                }
+            }
+            do {
+                totalTuples = this->database.tupleCount();
+                for (auto scComponent: scComponentVector) {
+                    cout << this->datalogProgram.Rules[scComponent].toString() << "." << endl;
+                    evaluateRule(this->datalogProgram.Rules[scComponent]);
+                }
+                passesThrough++;
+                newTotalTuples = this->database.tupleCount();
+            } while (totalTuples != newTotalTuples);
+
+        }
+        cout << passesThrough << " passes: R";
+        if (passesThrough != 0) {
+            sort(scComponentVector.begin(), scComponentVector.end());
+            for (auto scComponent: scComponentVector) {
+                auto it = find(scComponentVector.begin(), scComponentVector.end(), scComponent);
+                int index = it - scComponentVector.begin();
+                if (index != scComponentVector.size() - 1) {
+                    cout << scComponent << ",R";
+                }
+                else {
+                    cout << scComponent << endl;
+                }
             }
         }
     }
-
-    cout << endl;
 
 }
 
@@ -103,7 +144,6 @@ Relation Interpreter::evaluateRule(Rule r) {
     vector<Relation> joinRelations;
     //TODO: move this to another function so I can return the int of passes Through
     for (unsigned int i = 0; i < r.predicates.size(); ++i) {
-        cout << "loop through predicates " << i << endl;
         // skip first one since it's on the left hand side of the rule
         // then evaluate same way as queries
         if (i != 0 && r.predicates.size() == 2) {

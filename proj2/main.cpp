@@ -10,28 +10,7 @@ int main(int argc, char** argv) {
     if (argc != 2) {
         return 1;
     }
-    string inputString = "\n"
-                         "\n"
-                         "# dependency cycle with one rule\n"
-                         "\n"
-                         "\n"
-                         "Schemes:\n"
-                         "\n"
-                         "  a(x,y)\n"
-                         "\n"
-                         "Facts:\n"
-                         "\n"
-                         "  a('1','2').\n"
-                         "\n"
-                         "Rules:\n"
-                         "\n"
-                         "  a(x,y) :- a(y,x).\n"
-                         "\n"
-                         "Queries:\n"
-                         "\n"
-                         "  a(x,y)?\n"
-                         "\n"
-                         "";
+    string inputString = "";
     string inputFileName = argv[1];
     ifstream input(inputFileName);
 

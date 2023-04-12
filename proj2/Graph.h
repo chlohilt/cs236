@@ -37,6 +37,8 @@ public:
 
     vector<int> explorePartTwo(vector<int>& oneScComponent, int ruleNum, Node& node);
 
+    friend class Interpreter;
+
 };
 
 

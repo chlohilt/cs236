@@ -7,6 +7,7 @@ class Rule {
 private:
     string name;
     vector<Predicate> predicates;
+
 public:
     Rule();
 

@@ -25,6 +25,8 @@ public:
 
     friend class Graph;
 
+    friend class Interpreter;
+
 };
 
 #endif //INC_236_NODE_H
