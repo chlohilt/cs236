@@ -103,7 +103,7 @@ void Interpreter::evaluateRules(vector<vector<int>> scComponents) {
             cout << "SCC: R";
             for (auto scComponent: scComponentVector) {
                 auto it = find(scComponentVector.begin(), scComponentVector.end(), scComponent);
-                int index = it - scComponentVector.begin();
+                unsigned int index = it - scComponentVector.begin();
                 if (index != scComponentVector.size() - 1) {
                     cout << scComponent << ",R";
                 } else {
@@ -126,7 +126,7 @@ void Interpreter::evaluateRules(vector<vector<int>> scComponents) {
             sort(scComponentVector.begin(), scComponentVector.end());
             for (auto scComponent: scComponentVector) {
                 auto it = find(scComponentVector.begin(), scComponentVector.end(), scComponent);
-                int index = it - scComponentVector.begin();
+                unsigned int index = it - scComponentVector.begin();
                 if (index != scComponentVector.size() - 1) {
                     cout << scComponent << ",R";
                 }
